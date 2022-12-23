@@ -11,7 +11,7 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
     const [open,setOpen] = useState(false)
   return (
     <MantineAppShell
-      padding="md"
+      padding="sm"
       navbarOffsetBreakpoint="sm"
       navbar={<Navbar open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>}
       header={<Header open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>}

@@ -4,9 +4,10 @@ const CardContainer = ({children}) => {
   return (
     <section style={{
         display:'grid',
-        gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
+        gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))',
         gap: '8px',
-        padding: "10px 0"
+        padding: "10px 0",
+        overflow: "hidden",
     }}>
       {children}
     </section>
