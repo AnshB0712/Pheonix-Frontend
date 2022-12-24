@@ -1,7 +1,8 @@
 import React from 'react'
 import {Group, Navbar as MantineNavbar, Switch, Text, ThemeIcon, UnstyledButton} from "@mantine/core"
-import {IconBookmarks, IconShoppingCart, IconHome, IconPower, IconChevronRight, IconMoonStars } from '@tabler/icons';
+import {IconChevronRight, IconMoonStars } from '@tabler/icons';
 import { NavLink } from 'react-router-dom';
+import { NAVLINK_DATA } from '../constants';
 
 const MainLink = ({ icon, color, label , to, setOpen,colorScheme,toggleColorScheme}) => {
   return (
@@ -39,15 +40,8 @@ const MainLink = ({ icon, color, label , to, setOpen,colorScheme,toggleColorSche
   );
 }
 
-const data = [
-  { icon: <IconHome size={18} />, color: 'blue', label: 'Home',to:"/" },
-  { icon: <IconShoppingCart size={18} />, color: 'teal', label: 'Cart',to:'/cart' },
-  { icon: <IconBookmarks size={18} />, color: 'violet', label: 'My Orders',to:'/my-orders' },
-  { icon: <IconPower size={18} />, color: 'red', label: 'Logout', to:'/' },
-];
-
 const Links = ({setOpen}) => {
-  const links = data.map((link) => <MainLink setOpen={setOpen} {...link} key={link.label} />);
+  const links = NAVLINK_DATA.map((link) => <MainLink setOpen={setOpen} {...link} key={link.label} />);
   return <div>{links}</div>;
 }
 

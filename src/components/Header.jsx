@@ -3,15 +3,15 @@ import {ActionIcon, Burger, Button, Header as MantineHeader, MediaQuery, Title} 
 import { IconSun, IconMoonStars } from '@tabler/icons';
 import { useAuth } from '../context/AuthContext';
 
-const Header = ({setOpen,open,colorScheme,toggleColorScheme}) => {
+const Header = ({setOpen,open,colorScheme,toggleColorScheme,setOpenAuthModal}) => {
   const {user} = useAuth()
-
   const RightSideComponent = () => user ? (
     <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
       {colorScheme === 'dark' ? <IconSun size={18} /> : <IconMoonStars size={18} />}
     </ActionIcon>
   ):(
-    <Button size="xs" compact={false}>
+    <Button size="xs" onClick={() => {
+      setOpenAuthModal(p => !p)}}>
       Sign Up
     </Button>
   )

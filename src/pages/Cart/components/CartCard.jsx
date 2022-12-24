@@ -1,4 +1,4 @@
-import { ActionIcon, Badge, Button, Group, Image, Text, Title } from '@mantine/core'
+import { ActionIcon, Badge, Group, Image, Text, Title } from '@mantine/core'
 import { IconSquareMinus, IconSquarePlus } from '@tabler/icons'
 import React from 'react'
 import { CART_CONTEXT_ACTIONS } from '../../../constants'
@@ -22,19 +22,7 @@ const CounterButtons = ({name}) => {
   )
 }
 
-const FoodCard = ({data}) => {
-  const { cartState,dispatch } = useCart()
-
-  const addItemToCart = () => dispatch({
-    type: CART_CONTEXT_ACTIONS.ADD_TO_CART,
-    payload: {
-      ...data,
-      qty: 1
-    }
-  })
-
-  const isItemInACart = cartState?.find(item => item.name === data.name)
-
+const CartCard = ({data}) => {
   return (
     <div 
     style={{
@@ -61,11 +49,10 @@ const FoodCard = ({data}) => {
         style={{marginTop:"auto"}}
         >{data?.category}</Badge>
         <Text style={{marginTop:"auto"}} color='dimmed' fw={500} fz="md">{`₹${data?.perPrice}`}</Text>
-        {!isItemInACart && <Button style={{marginTop:"auto",width:"100%"}} onClick={() => addItemToCart(data.name)}>Add</Button>}
-        { isItemInACart && <CounterButtons name={data.name}/>}
+        <CounterButtons name={data.name}/>
     </div>
     </div>
   )
 }
 
-export default FoodCard
+export default CartCard
