@@ -3,10 +3,12 @@ import { IconShieldLock } from '@tabler/icons'
 import React from 'react'
 import { useCart } from '../../../context/CartContext'
 import { useAuth } from '../../../context/AuthContext'
+import useCreateOrder from '../../../hooks/useCreateOrder'
 
 const PaymentButton = () => {
     const {totalValue,orderItems,orderType} = useCart()
     const {user} = useAuth()
+    const {trigger,isLoading,error} = useCreateOrder()
 
     const handlePayment = () => {
       const order = {
@@ -17,13 +19,13 @@ const PaymentButton = () => {
         amount: totalValue,
         items: orderItems
       }
-      console.log(order)
+      trigger(order)
     }
 
   return (
     <Group gutter={0} style={{position:'fixed',bottom:'0',left:'0',width:'100%',padding:'5px'}}>
-        <Tooltip withArrow={true} arrowPosition='center' label="Sign up to continue with the payment." offset={5} opened={!user}>
-            <Button onClick={handlePayment} disabled={!user} size={'lg'} fullWidth leftIcon={<IconShieldLock/>}>
+        <Tooltip withArrow={true} arrowPosition='center' label={"Sign up to continue with the payment."} offset={5} opened={!user}>
+            <Button loading={isLoading} onClick={handlePayment} disabled={!user} size={'lg'} fullWidth leftIcon={<IconShieldLock/>}>
                 {`Pay ${totalValue}`}
             </Button>
         </Tooltip>

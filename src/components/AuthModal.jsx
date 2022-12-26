@@ -2,6 +2,7 @@ import { Group, Modal,Space,Text } from '@mantine/core'
 import axios from 'axios'
 import OTPlessSdk from 'otpless-js-sdk'
 import React, { useEffect, useState } from 'react'
+import customAxios from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 import WhatsAppButton from './WhatsAppButton'
 
@@ -25,7 +26,7 @@ const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
       const handleWhatsAppLogin = async (token,state) => {
         setWait(true)
         try {
-          const {data} = await axios.post("http://localhost:3000/auth/whatsapp-login",{ token,state },{
+          const {data} = await customAxios.post("auth/whatsapp-login",{ token,state },{
             withCredentials: true
           })
           setUser(data)

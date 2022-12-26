@@ -1,13 +1,13 @@
 import useSWR  from 'swr'
-import axios from 'axios'
+import customAxios, { BASE_URL } from '../api/axios'
 
-const fetcher = (...args) => axios.get(...args).then(({data}) => data)
+const fetcher = (args) => customAxios.get(...args).then(({data}) => data)
 
 const useGetDishes = (searchQuery) => {
-  const {data,error} = useSWR(['http://localhost:3000/',{params:{category:searchQuery}}],fetcher)
+  const {data,error,isLoading} = useSWR([BASE_URL,{params:{category:searchQuery}}],fetcher)
   return ({
     data,
-    isLoading: !data && !error,
+    isLoading,
     error
   })
 }
