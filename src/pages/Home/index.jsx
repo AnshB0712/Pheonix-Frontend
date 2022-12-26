@@ -8,6 +8,7 @@ import UserBox from './components/UserBox'
 import LoaderScreen from '../../components/LoaderScreen'
 import EmptyStateComponent from '../../components/EmptyStateComponent'
 import useGetDishes from '../../hooks/useGetDishes'
+import ViewCartBottomBar from './components/ViewCartBottomBar'
 
 
 
@@ -27,6 +28,7 @@ const Home = () => {
       {isLoading ? <LoaderScreen/> : !error && <DataDisplay data={data}/>}
       {error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={error.message} index={'1'}/>}
     </CardContainer>
+    <ViewCartBottomBar/>
     </>
   )
 }

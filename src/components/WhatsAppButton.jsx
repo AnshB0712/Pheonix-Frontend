@@ -11,11 +11,11 @@ const WhatsAppButton = ({wait,setWait}) => {
             appId: import.meta.env.VITE_APP_ID,
             enableErrorLogging: true
       });
-
+      
   return (
     <Button loading={wait} size='md' leftIcon={<WhatsLogo/>} fullWidth bg={"#25D366"} onClick={async() => {
       setWait(true)
-      await createGetIntentOnClick({redirectionURL: "http://localhost:5173/"})()
+      await createGetIntentOnClick({redirectionURL: location.href})()
     }}>
        Continue with WhatsApp
     </Button>

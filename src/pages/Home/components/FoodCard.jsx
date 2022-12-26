@@ -40,7 +40,8 @@ const FoodCard = ({data}) => {
     style={{
         display: 'grid',
         gridTemplateColumns: '120px 200px',
-        padding: "10px",
+        alignItems:'center',
+        padding: "5px",
         border: "1px solid #CED4DA",
         borderRadius: "5px",
         overflow: "hidden"

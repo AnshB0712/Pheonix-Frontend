@@ -4,13 +4,15 @@ import React from 'react'
 import { CART_CONTEXT_ACTIONS } from '../../../constants'
 import { useCart } from '../../../context/CartContext'
 
-const CounterButtons = ({name}) => {
-  const { cartState,dispatch } = useCart()
-  const isItemInACart = cartState?.find(item => item.name === name)
+const CounterButtons = ({name,isItemInACart,dispatch}) => {
   return (
-    <Group position='apart' sx={theme => ({
+    <>
+    <div style={{
       width:"100%",
-    })}>
+      display:'flex',
+      flexDirection: 'column',
+      alignItems:'center'
+    }}>
       <ActionIcon onClick={() => dispatch({type:CART_CONTEXT_ACTIONS.MANIPULATE_QTY,payload:{sign:'-',itemName:name}})} size={'lg'}>
         <IconSquareMinus size={26}/>
       </ActionIcon>
@@ -18,17 +20,22 @@ const CounterButtons = ({name}) => {
       <ActionIcon onClick={() => dispatch({type:CART_CONTEXT_ACTIONS.MANIPULATE_QTY,payload:{sign:'+',itemName:name}})} size={'lg'}>
         <IconSquarePlus size={26}/>
       </ActionIcon>
-    </Group>
+    </div>
+    </>
   )
 }
 
 const CartCard = ({data}) => {
+  const { cartState,dispatch } = useCart()
+  const isItemInACart = cartState?.find(item => item.name === data.name)
   return (
     <div 
     style={{
         display: 'grid',
-        gridTemplateColumns: '120px 200px',
-        padding: "10px",
+        gridTemplateColumns: '120px 150px 50px',
+        alignItems:'center',
+        padding: "5px",
+        marginBottom: '5px',
         border: "1px solid #CED4DA",
         borderRadius: "5px",
         overflow: "hidden"
@@ -42,15 +49,13 @@ const CartCard = ({data}) => {
         padding:"5px 10px",
     }}>
         <Title order={5}>{data?.name}</Title>
-        <Badge
-        variant='outline'
-        size='sm'
-        radius={'sm'}
-        style={{marginTop:"auto"}}
-        >{data?.category}</Badge>
         <Text style={{marginTop:"auto"}} color='dimmed' fw={500} fz="md">{`₹${data?.perPrice}`}</Text>
-        <CounterButtons name={data.name}/>
+        <Group position='apart' sx={{width:'100%'}}>
+          <Text size={12} fw={500} fs={'italic'} color={'dimmed'}>Item Total</Text>
+          <Text size={12} fw={500} fs={'italic'} > {`₹${isItemInACart.qty*isItemInACart.perPrice}`}</Text>
+        </Group>
     </div>
+        <CounterButtons name={data.name} isItemInACart={isItemInACart} dispatch={dispatch}/>
     </div>
   )
 }
