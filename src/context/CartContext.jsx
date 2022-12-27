@@ -12,6 +12,9 @@ const reducer = (state,action) => {
     if(type === CART_CONTEXT_ACTIONS.ADD_TO_CART){
         return [...state,{...payload}]
     }
+    if(type === CART_CONTEXT_ACTIONS.DELETE_CART){
+        return []
+    }
 
     if(type === CART_CONTEXT_ACTIONS.REMOVE_FROM_CART){
         return [...state.filter(item => item.itemName !== payload.itemName)]

@@ -1,5 +1,5 @@
-import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { useState } from 'react';
+import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import AppShell from './components/AppShell';
 import { theme } from './theme';
 

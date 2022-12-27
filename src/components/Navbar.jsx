@@ -1,8 +1,9 @@
 import React from 'react'
 import {Group, Navbar as MantineNavbar, Switch, Text, ThemeIcon, UnstyledButton} from "@mantine/core"
-import {IconChevronRight, IconMoonStars } from '@tabler/icons';
+import {IconChevronRight, IconMoonStars, IconPower } from '@tabler/icons';
 import { NavLink } from 'react-router-dom';
 import { NAVLINK_DATA } from '../constants';
+import Logout from './Logout';
 
 const MainLink = ({ icon, color, label , to, setOpen,colorScheme,toggleColorScheme}) => {
   return (
@@ -50,6 +51,7 @@ const Navbar = ({open,setOpen,colorScheme,toggleColorScheme}) => {
     <MantineNavbar width={{ sm: 200, lg: 300 }} hidden={!open} height={500} p="xs">
       <Links setOpen={setOpen}/>
       {/* DARK MODE SWITCH */}
+      <Logout icon={<IconPower size={18} />} label="Logout" color='red' to='/' setOpen={setOpen}/>
       <MainLink icon={<IconMoonStars size={18}/>} label="Dark Mode" color='yellow' colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>
     </MantineNavbar>
   )

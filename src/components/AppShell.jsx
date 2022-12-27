@@ -8,6 +8,7 @@ import MyOrders from '../pages/MyOrders'
 import Cart from '../pages/Cart'
 import AuthModal from './AuthModal'
 import OtplessSdk from "otpless-js-sdk";
+import StatusPage from '../pages/Status'
 
 
 const AppShell = ({colorScheme,toggleColorScheme}) => {
@@ -39,6 +40,7 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
         <Route path='/' element={<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/my-orders' element={<MyOrders/>}/>
+        <Route path='/order/:orderId' element={<StatusPage/>}/>
       </Routes>
       <AuthModal openAuthModal={openAuthModal} setOpenAuthModal={setOpenAuthModal}/>
     </MantineAppShell>

@@ -8,7 +8,6 @@ const useAxiosWithInterceptor = () => {
   useEffect(() => {
     const requestIntercept = customAxios.interceptors.request.use(
       config => {
-        console.log(config);
         if(!config.headers['authorization']){
           config.headers['authorization'] = user?.token ? `Bearer ${user?.token}` : undefined;
         }
