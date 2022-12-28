@@ -63,7 +63,7 @@ const OrderDetails = ({data}) => {
                 <List.Item>
                   {
                   value.map(obj => Object.entries(obj).map(([key,value]) => {
-                  if(key==='_id') return
+                  if(key==='_id' || key==='perPrice' || key==='itemId') return
                   return(
                   <Group>
                   <Text>{`${key}:`}</Text>

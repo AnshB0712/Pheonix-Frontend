@@ -1,6 +1,5 @@
-import { Space } from '@mantine/core'
 import React,{useState} from 'react'
-import CardContainer from './components/CardContainer'
+import CardContainer from '../../components/CardContainer'
 import FoodCard from './components/FoodCard'
 import SearchInput from './components/SearchInput'
 import UserBox from './components/UserBox'

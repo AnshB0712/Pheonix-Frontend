@@ -8,12 +8,18 @@ export const useCart = () => useContext(CartContext)
 
 const reducer = (state,action) => {
     const {type,payload} = action
-
+    console.log({type,payload})
     if(type === CART_CONTEXT_ACTIONS.ADD_TO_CART){
         return [...state,{...payload}]
     }
     if(type === CART_CONTEXT_ACTIONS.DELETE_CART){
         return []
+    }
+
+
+    if(type === CART_CONTEXT_ACTIONS.SET_CART){
+        console.log(CART_CONTEXT_ACTIONS.SET_CART);
+        return [...payload]
     }
 
     if(type === CART_CONTEXT_ACTIONS.REMOVE_FROM_CART){
@@ -40,7 +46,7 @@ const CartContextProvider = ({children}) => {
 
     // DERIVED STATES
     const totalValue = cartState.reduce((acc,cur)=>{ return acc + cur.qty*cur.perPrice},0)
-    const orderItems = cartState.map(item => ({itemName:item.name,qty:item.qty,perPrice:item.perPrice}))
+    const orderItems = cartState.map(item => ({itemName:item.name,itemId:item._id,qty:item.qty,perPrice:item.perPrice}))
 
     // ORDER TYPE DINE OR TAKE OUT
     const [orderType,setOrderType] = useState(localStorageOrder ? JSON.parse(localStorageOrder)['orderType'] : '7')

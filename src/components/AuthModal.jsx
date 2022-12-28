@@ -30,6 +30,7 @@ const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
             withCredentials: true
           })
           setUser(data)
+          localStorage.setItem('user', JSON.stringify(data))
           setOpenAuthModal(false)
         } catch (error) {
           console.log(error)

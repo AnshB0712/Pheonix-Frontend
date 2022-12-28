@@ -1,13 +1,13 @@
 import useSWR from 'swr'
+import { useAuth } from '../context/AuthContext'
 import useAxiosWithInterceptor from './useAxiosWithInterceptor'
 
-const useGetOrderStatus = (orderId) => {
+const useGetAllPastOrders = () => {
+  const { user } = useAuth()
   const customAxios = useAxiosWithInterceptor()
   const fetcher = (args) => customAxios.get(...args).then(({data}) => data)
-  const { data,error,isLoading } = useSWR([`shared/order`,{params:{orderId}}],fetcher,{
-    refreshInterval: 60000
-  })
+  const { data,error,isLoading } = useSWR([`user/get-all-orders`,{params:{userId: user.id}}],fetcher)
   return ({ data,error,isLoading })
 }
 
-export default useGetOrderStatus
+export default useGetAllPastOrders

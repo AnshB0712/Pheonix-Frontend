@@ -1,7 +1,4 @@
-import { useMemo } from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import { useEffect,useContext,useState,createContext } from "react";
 
 const AuthContext = createContext()
 
@@ -9,9 +6,17 @@ export const useAuth = () => useContext(AuthContext)
 
 const AuthProvider = ({children}) => {
     const [user,setUser] = useState("")
-    const memoisedValue = useMemo(() => ({user,setUser}))
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+          const foundUser = JSON.parse(loggedInUser);
+          setUser(foundUser);
+        }
+      }, []);
+
     return(
-        <AuthContext.Provider value={memoisedValue}>
+        <AuthContext.Provider value={{user,setUser}}>
             {children}
         </AuthContext.Provider>
     )

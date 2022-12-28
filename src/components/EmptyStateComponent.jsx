@@ -1,4 +1,4 @@
-import { Group, Text, Title } from '@mantine/core'
+import { Center, Group, Loader, Text, Title } from '@mantine/core'
 import React from 'react'
 import { ReactComponent as Puzzle } from "../assets/Puzzle.svg";
 import { ReactComponent as ErrorServer } from "../assets/ErrorServer.svg";
@@ -20,6 +20,13 @@ const LookUpObject = {
         title: 'Empty Cart',
         body: "Add some items to the cart and then come back here."
     },
+    3: {
+        component: (
+          <Center style={{height:'500px'}}>
+            <Loader size={'sm'}/>
+          </Center>
+        ),
+    },
 }
 
 const EmptyStateComponent = ({index,title,body}) => {
@@ -27,8 +34,8 @@ const EmptyStateComponent = ({index,title,body}) => {
   return (
     <Group position='center' spacing={'xs'}>
       {component}
-      <Title order={5}>{title || lookupTitle}</Title>
-      <Text fw={400} fz={'md'} color={'dimmed'} ta={'center'}>{body || lookupBody}</Text>
+      <Title order={5}>{title || lookupTitle || ''}</Title>
+      <Text fw={400} fz={'md'} color={'dimmed'} ta={'center'}>{body || lookupBody || ''}</Text>
     </Group>
   )
 }

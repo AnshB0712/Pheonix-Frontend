@@ -1,5 +1,6 @@
 import { Text } from '@mantine/core'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {ReactComponent as SuccessIcon} from '../../../assets/SuccessIcon.svg'
 
 const Waves = (props) => {
@@ -71,6 +72,11 @@ const Waves = (props) => {
             width: '110px',
             borderRadius:'50%'
         }}/>
+        <Text underline c='white' style={{
+             position:'absolute',
+             top:'20px',
+             left:'20px',
+        }} component={Link} to='/my-orders'>Back</Text>
         <Text ta={'center'}>Order succesful with ID : <b>{props.id}</b></Text>
     </div>
   )

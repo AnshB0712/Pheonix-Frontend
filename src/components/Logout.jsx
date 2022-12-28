@@ -28,6 +28,7 @@ const Logout = ({ icon, color, label , to, setOpen}) => {
     component={NavLink}
     to={to}
     onClick={() => {
+        localStorage.removeItem('user');
         setUser(null)
         setOpen(false)
     }}
