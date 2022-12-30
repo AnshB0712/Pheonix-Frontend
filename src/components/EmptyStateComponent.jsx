@@ -3,6 +3,7 @@ import React from 'react'
 import { ReactComponent as Puzzle } from "../assets/Puzzle.svg";
 import { ReactComponent as ErrorServer } from "../assets/ErrorServer.svg";
 import { ReactComponent as Astronaut } from "../assets/Astronaut.svg";
+import { ReactComponent as ErrorRocket } from "../assets/ErrorRocket.svg";
 
 const LookUpObject = {
     0: {
@@ -26,6 +27,11 @@ const LookUpObject = {
             <Loader size={'sm'}/>
           </Center>
         ),
+    },
+    4: {
+        component: <ErrorRocket style={{width:'70%'}}/>,
+        title: 'Protected Route',
+        body: "Sign Up to get access of this page."
     },
 }
 

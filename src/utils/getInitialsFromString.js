@@ -1,4 +1,3 @@
-
 const getInitialsFromString = (string) => {
     let initials = ''
     const [first,last] = string.toUpperCase().split(' ')

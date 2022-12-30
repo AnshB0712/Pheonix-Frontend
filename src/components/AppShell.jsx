@@ -9,6 +9,8 @@ import Cart from '../pages/Cart'
 import AuthModal from './AuthModal'
 import OtplessSdk from "otpless-js-sdk";
 import StatusPage from '../pages/Status'
+import ProtectedRoute from './ProtectedRoute'
+import getTokenFromLocalStorage from '../utils/getTokenFromLocalStorage'
 
 
 const AppShell = ({colorScheme,toggleColorScheme}) => {
@@ -25,7 +27,7 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
     const state = getState()
 
     useEffect(() => {
-      if(!token || !state) return
+      if(!token || !state || getTokenFromLocalStorage()) return
       setOpenAuthModal(true)
     },[token,state])
 
@@ -39,8 +41,10 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
-        <Route path='/my-orders' element={<MyOrders/>}/>
-        <Route path='/order/:orderId' element={<StatusPage/>}/>
+        <Route element={<ProtectedRoute/>}>
+          <Route path='/my-orders' element={<MyOrders/>}/>
+          <Route path='/order/:orderId' element={<StatusPage/>}/>
+        </Route>
       </Routes>
       <AuthModal openAuthModal={openAuthModal} setOpenAuthModal={setOpenAuthModal}/>
     </MantineAppShell>

@@ -48,7 +48,7 @@ const Links = ({setOpen}) => {
 
 const Navbar = ({open,setOpen,colorScheme,toggleColorScheme}) => {
   return (
-    <MantineNavbar width={{ sm: 200, lg: 300 }} hidden={!open} height={500} p="xs">
+    <MantineNavbar width={{ sm: 200, lg: 300 }} hidden={!open} height={'100%'} p="xs">
       <Links setOpen={setOpen}/>
       {/* DARK MODE SWITCH */}
       <Logout icon={<IconPower size={18} />} label="Logout" color='red' to='/' setOpen={setOpen}/>

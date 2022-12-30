@@ -15,7 +15,7 @@ const WhatsAppButton = ({wait,setWait}) => {
   return (
     <Button loading={wait} size='md' leftIcon={<WhatsLogo/>} fullWidth bg={"#25D366"} onClick={async() => {
       setWait(true)
-      await createGetIntentOnClick({redirectionURL: location.href})()
+      await createGetIntentOnClick({redirectionURL: location.href.split('?')[0]})()
     }}>
        Continue with WhatsApp
     </Button>

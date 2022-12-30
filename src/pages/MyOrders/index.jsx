@@ -17,7 +17,7 @@ const MyOrders = () => {
       <CardContainer>
         {isLoading && <EmptyStateComponent index='3'/>}
         {error &&  <EmptyStateComponent title={`${error.code}: ${error.name}`} body={error.message} index={'1'}/>}
-        {data?.data?.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))?.map(obj => <PastOrderCard data={obj}/>)}
+        {data?.data?.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))?.map(obj => <PastOrderCard key={obj._id} data={obj}/>)}
       </CardContainer>
     </>
   )

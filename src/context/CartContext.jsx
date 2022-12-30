@@ -8,7 +8,6 @@ export const useCart = () => useContext(CartContext)
 
 const reducer = (state,action) => {
     const {type,payload} = action
-    console.log({type,payload})
     if(type === CART_CONTEXT_ACTIONS.ADD_TO_CART){
         return [...state,{...payload}]
     }
@@ -63,48 +62,3 @@ const CartContextProvider = ({children}) => {
 }
 
 export default CartContextProvider
-
-
-// orderByName: {
-//     type: String,
-//     required: [true,"Name required to create an order!"]
-// },
-// orderByMobile: {
-//     type: String,
-//     required: [true,"Phone Number required to create an order!"]
-// },
-// orderBy: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     required: [true,"Phone Number required to create an order!"]
-// },
-// orderType:{
-//     type: Number,
-//     enum: [7,13],
-//     default:  7
-// },
-// orderStatus:{
-//     type: String,
-//     enum: ["SXS","PNDG"],
-//     default: "PNDG"
-// },
-// amount: {
-//     type: Number,
-//     required: [true,"Amount is required to create orders!"]
-// },
-// items: [
-//     {
-//         itemName:{
-//             type: String,
-//             required: [true,"Item name is required to create orders!"]
-//         },
-//         qty:{
-//             type: Number,
-//             required: [true,"Quantity is required to create orders!"]
-//         },
-//     }
-// ],
-// PaymentStatus: {
-//     type: String,
-//     enum: ["SXS","PNDG","FLD"],
-//     default: "PNDG"
-// }

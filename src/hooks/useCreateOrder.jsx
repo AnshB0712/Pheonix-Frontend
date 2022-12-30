@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import useSWRMutation from 'swr/mutation'
+import customAxios from '../api/axios'
 import { CART_CONTEXT_ACTIONS } from '../constants'
 import { useCart } from '../context/CartContext'
-import useAxiosWithInterceptor from './useAxiosWithInterceptor'
 
 const useCreateOrder = () => {
-    const axiosWithInt = useAxiosWithInterceptor()
     const {dispatch} = useCart()
     const [isLoading,setIsLoading] = useState(false)
     const [error,setError] = useState(null)
@@ -13,7 +12,16 @@ const useCreateOrder = () => {
     const createOrder = async (url,{arg}) => {
         try {
         setIsLoading(true)
-        await axiosWithInt.post(url,arg)
+        const {data:{objectId}} = await customAxios.post(url,arg)
+        const {data:{response:{body}}} = await customAxios.post('/payment/paytm',{
+          orderId: objectId,
+          userId: arg.orderBy
+        })
+        const paymentResponse = await customAxios.post('/payment/paytm/process',{
+          orderId: objectId,
+          txnToken: body?.txnToken
+        })
+        console.log(paymentResponse)
         localStorage.removeItem('order');
         dispatch({type: CART_CONTEXT_ACTIONS.DELETE_CART})
 
