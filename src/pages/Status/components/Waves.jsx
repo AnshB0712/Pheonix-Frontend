@@ -2,11 +2,23 @@ import { Text } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {ReactComponent as SuccessIcon} from '../../../assets/SuccessIcon.svg'
+import {ReactComponent as Cancel} from '../../../assets/Cancel.svg'
+import {ReactComponent as Exclamation} from '../../../assets/Exclamation.svg'
+
+const IconStyle = {
+    position:'absolute',
+    top:'40%',
+    left:'50%',
+    transform: 'translate(-50%,-50%)',
+    height: '110px',
+    width: '110px',
+    borderRadius:'50%'
+}
 
 const Waves = (props) => {
 
- const colorOfWaves = props.paymentStatus === 'PNDG' ? '#f9b200':'#00d084'
-
+ const colorOfWaves = props.paymentStatus === 'PNDG' ? '#f9b200': props.paymentStatus === 'SXS' ? '#00d084' : '#f44336'
+ const statusIcon =  props.paymentStatus === 'PNDG' ? <Exclamation style={{...IconStyle,height:'100px'}} /> : props.paymentStatus === 'SXS' ? <SuccessIcon style={IconStyle}/> : <Cancel style={IconStyle}/>
   return (
     <div style={{overflow:'hidden',position:'relative'}}>
         <svg
@@ -63,15 +75,7 @@ const Waves = (props) => {
             }}
             />
         </svg>
-        <SuccessIcon style={{
-            position:'absolute',
-            top:'40%',
-            left:'50%',
-            transform: 'translate(-50%,-50%)',
-            height: '110px',
-            width: '110px',
-            borderRadius:'50%'
-        }}/>
+        {statusIcon}
         <Text underline c='white' style={{
              position:'absolute',
              top:'20px',

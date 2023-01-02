@@ -18,7 +18,7 @@ const StatusPage = () => {
     fullScreen 
     opened 
     withCloseButton={false}>
-        <Waves id={data?.data?._id} paymentStatus={data?.data?.PaymentStatus}/>
+        <Waves id={data?.data?._id} paymentStatus={data?.data?.paymentStatus}/>
         <Paper style={{padding:'10px'}}>
             <OrderDetails data={data?.data}/>
         </Paper>

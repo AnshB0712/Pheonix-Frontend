@@ -26,7 +26,7 @@ const PaymentButton = () => {
     <Group gutter={0} style={{position:'fixed',bottom:'0',left:'0',width:'100%'}}>
         <Tooltip withArrow={true} arrowPosition='center' label={"Sign up to continue with the payment."} offset={5} opened={!user}>
             <Button radius={0} loading={isLoading} onClick={handlePayment} disabled={!user} size={'lg'} fullWidth leftIcon={<IconShieldLock/>}>
-                {`Pay ${totalValue}`}
+                {`Pay ₹${totalValue}`}
             </Button>
         </Tooltip>
     </Group>

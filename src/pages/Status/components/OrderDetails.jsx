@@ -18,7 +18,7 @@ const OrderDetails = ({data}) => {
                 <Group>
                 <Text>{`${key}:`}</Text>
                 <Text fw={500}>
-                  {(value === '7' ? "Dine In":"Take Out")}
+                  {(value == '7' ? "Dine In":"Take Out")}
                 </Text>
               </Group>
               )
@@ -46,11 +46,11 @@ const OrderDetails = ({data}) => {
               )
             }
 
-            if(key === 'orderStatus' || key === 'PaymentStatus'){
+            if(key === 'orderStatus' || key === 'paymentStatus'){
               return (
                 <Group>
                 <Text>{`${key}:`}</Text>
-                <Badge variant='filled' bg={value==='PNDG' ? 'yellow':'green'}>{value==='PNDG' ? 'Pending':'Success'}</Badge>
+                <Badge variant='filled' bg={value==='PNDG' ? 'yellow': value==='FLD' ? 'red':'green'}>{value==='PNDG' ? 'Pending': value==='FLD' ? 'Failed':'Success'}</Badge>
               </Group>
               )
             }

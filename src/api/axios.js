@@ -2,7 +2,7 @@ import axios from 'axios'
 import getTokenFromLocalStorage from '../utils/getTokenFromLocalStorage';
 import refreshAcessToken from '../utils/refreshAcessToken';
 
-export const BASE_URL =  'https://pheonix-server.vercel.app/'
+export const BASE_URL =  'http://localhost:3000/'
 {/*'http://localhost:3000/'*/}
 
 const customAxios = axios.create({
