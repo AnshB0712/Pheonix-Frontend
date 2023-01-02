@@ -11,6 +11,12 @@ const useCreateOrder = () => {
   const [isLoading,setIsLoading] = useState(false)
   const [error,setError] = useState(null)
 
+  const stopLoadingUI = () => {
+    dispatch({type: CART_CONTEXT_ACTIONS.DELETE_CART})
+    localStorage.removeItem('order')
+    setIsLoading(false)
+  }
+
   const createOrder = async (url, {arg}) => {
       try {
         setIsLoading(true)
@@ -20,14 +26,12 @@ const useCreateOrder = () => {
             userId: arg.orderBy,
             amount
           })
-        loadDynamicScript({ orderId:objectId,token:body?.txnToken },dispatch)
-        localStorage.removeItem('order')
+        loadDynamicScript({ orderId:objectId,token:body?.txnToken },stopLoadingUI)
       } catch (error) {
         console.log(error);
         setError(error)
       } finally {
         removeAppendedScript()
-        setIsLoading(false)
       }
 
 

@@ -1,6 +1,6 @@
 import { onScriptLoad } from './checkout';
 
-export const loadDynamicScript = (data,dispatch) => {
+export const loadDynamicScript = (data,stopLoadingUI) => {
   const existingScript = document.getElementById('Paytm');
 
   if (!existingScript) {
@@ -10,12 +10,12 @@ export const loadDynamicScript = (data,dispatch) => {
     document.body.appendChild(script);
 
     script.onload = () => {
-      onScriptLoad(data,dispatch);
+      onScriptLoad(data,stopLoadingUI);
     };
   }
 
   if (existingScript) {
-    onScriptLoad(data,dispatch);
+    onScriptLoad(data,stopLoadingUI);
   }
 };
 

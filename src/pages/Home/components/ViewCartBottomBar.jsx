@@ -13,9 +13,9 @@ const ViewCartBottomBar = () => {
   return (
     <Group onClick={() => navigate('/cart')} sx={{
         position: 'fixed',
-        bottom:'2.5px',
-        left:'2.5%',
-        width: '95%',
+        bottom:'1.5px',
+        left:"1.5px",
+        width: '99%',
         padding: "10px 8px",
         borderRadius: '8px'
     }} position='apart' bg={'#25D366'}>

@@ -1,7 +1,7 @@
 import { CART_CONTEXT_ACTIONS } from "../constants";
 import { cancelOrder } from "../utils/cancelOrder";
 
-export const onScriptLoad = (data,dispatch) => {
+export const onScriptLoad = (data,stopLoadingUI) => {
     const { orderId,token } = data
   const config = {
     root: '',
@@ -36,7 +36,7 @@ export const onScriptLoad = (data,dispatch) => {
         .then(function onSuccess () {
           // after successfully updating configuration, invoke JS Checkout
           window.Paytm.CheckoutJS.invoke();
-          dispatch({type: CART_CONTEXT_ACTIONS.DELETE_CART})
+          stopLoadingUI();
         })
         .catch(function onError (error) {
           console.log('error => ', error);
