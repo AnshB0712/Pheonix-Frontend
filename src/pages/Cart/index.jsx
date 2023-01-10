@@ -1,5 +1,4 @@
-import { Button, Center, Container, Group, NativeSelect, Title } from '@mantine/core'
-import { IconTriangle } from '@tabler/icons'
+import { Button, Center, Text, Group, NativeSelect, Switch, Title } from '@mantine/core'
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
@@ -14,21 +13,19 @@ const DataDisplay = ({data}) => {
 }
 
 const Cart = () => {
-  const {cartState,totalValue,orderItems,setOrderType,orderType} = useCart()
+  const {cartState,totalValue,orderItems,setOrderType} = useCart()
  
   const isCartEmpty = () => Boolean(cartState.length)
 
   return (
     <>
       <Group position='apart'>
-        <Title order={4}>Order Summary</Title>
-        <NativeSelect
-          size='sm'
-          value={orderType}
-          onChange={e => setOrderType(e.target.value)}
-          icon={<IconTriangle size={18} color={"#25D366"}/>}
-          data={[{value:'7',label:"Dine In"},{value:'13',label:"Take Away"}]}
-        />
+        <Title order={5}>Order Summary</Title>
+        <Group position='apart' align={'center'} spacing={5}>
+          <Text fz={14} fw={500} style={{paddingTop:"1.5px"}}>Take Out</Text>
+            <Switch defaultChecked={true} onChange={e => setOrderType(e.target.checked ? '7':'13')} style={{display:"grid"}}/>
+          <Text fz={14} fw={500} style={{paddingTop:"1.5px"}}>Dine In</Text>
+        </Group>
       </Group>
       <div style={{padding:"10px 0",maxHeight:'400px',overflow:'scroll'}}>
         {!isCartEmpty() ?  <EmptyStateComponent index={'2'}/> : <DataDisplay data={cartState}/>}

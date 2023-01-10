@@ -42,7 +42,6 @@ const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
       }
 
       handleWhatsAppLogin(token,state)
-
     },[])
 
     return (
@@ -52,9 +51,9 @@ const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
                 <Text fw={500} ta={'center'}>Use your WhatsApp credentials to continue your order.</Text>
             </Group>
             <Space h="lg"/>
-            {error && <Text c={'red'} fw={600} fz={12} ta='center'>ERR: {error.message} CODE: 500</Text>}
+            {error && <Text c={'red'} fw={600} fz={12} ta='center'>ERR: {error.message}</Text>}
             {error && <Space h="xs"/>}
-            <WhatsAppButton wait={wait} setWait={setWait}/>
+            <WhatsAppButton wait={wait} setWait={setWait} setError={setError}/>
         </Modal>
     )
 }

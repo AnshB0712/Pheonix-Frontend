@@ -26,16 +26,14 @@ const useCreateOrder = () => {
             userId: arg.orderBy,
             amount
           })
-        loadDynamicScript({ orderId:objectId,token:body?.txnToken },stopLoadingUI)
+        loadDynamicScript({ orderId:objectId,txnToken:body?.txnToken },stopLoadingUI)
       } catch (error) {
         console.log(error);
+        setIsLoading(false)
         setError(error)
       } finally {
         removeAppendedScript()
-      }
-
-
-      
+      }      
 }
     
 const { trigger } = useSWRMutation('/user/create-a-order', createOrder)
