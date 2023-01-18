@@ -1,7 +1,6 @@
 const PAYTM_GATEWAY_URL =`${import.meta.env.VITE_PAYTM_URL}/theia/api/v1/showPaymentPage?mid=${import.meta.env.VITE_PAYTM_MID}&orderId=`;
 
 function buildForm(data) {
-  console.log(data)
   const form = document.createElement('form');
   form.setAttribute('method', 'post');
   form.setAttribute('name','paytm');
@@ -33,7 +32,6 @@ export const loadDynamicScript = (data,stopLoadingUI) => {
   const paytmForm = buildForm(data);
   document.body.appendChild(paytmForm);
   paytmForm.submit();
-  console.log(paytmForm)
   stopLoadingUI()
 };
 

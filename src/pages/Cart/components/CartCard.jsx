@@ -25,7 +25,7 @@ const CounterButtons = ({name,isItemInACart,dispatch}) => {
   )
 }
 
-const CartCard = ({data}) => {
+const CartCard = (data) => {
   const { cartState,dispatch } = useCart()
   const isItemInACart = cartState?.find(item => item.name === data.name)
   return (
@@ -48,7 +48,7 @@ const CartCard = ({data}) => {
         alignItems:"flex-start",
         padding:"5px 10px",
     }}>
-        <Title order={5}>{data?.name}</Title>
+        <Title order={5} transform={'capitalize'}>{data?.name}</Title>
         <Text style={{marginTop:"auto"}} color='dimmed' fw={500} fz="md">{`₹${data?.perPrice}`}</Text>
         <Group position='apart' sx={{width:'100%'}}>
           <Text size={12} fw={500} fs={'italic'} color={'dimmed'}>Item Total</Text>

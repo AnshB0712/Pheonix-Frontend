@@ -4,7 +4,6 @@ import OTPlessSdk from 'otpless-js-sdk'
 import React, { useEffect, useState } from 'react'
 import customAxios from '../api/axios'
 import { useAuth } from '../context/AuthContext'
-import getTokenFromLocalStorage from '../utils/getTokenFromLocalStorage'
 import WhatsAppButton from './WhatsAppButton'
 
 const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
@@ -23,14 +22,14 @@ const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
 
     useEffect(() => {
 
-      if(!token || !state || getTokenFromLocalStorage()) return
+      if(!token || !state || localStorage.getItem('user')) return
 
       const handleWhatsAppLogin = async (token,state) => {
         setWait(true)
         try {
           const {data} = await customAxios.post("auth/whatsapp-login",{ token,state })
           setUser(data)
-          localStorage.setItem('user', JSON.stringify(data))
+          localStorage.setItem('user',JSON.stringify({name: data.name,id: data.id}))
           setError('')
           setOpenAuthModal(false)
         } catch (error) {

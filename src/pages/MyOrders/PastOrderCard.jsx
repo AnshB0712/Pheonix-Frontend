@@ -5,7 +5,7 @@ import { useCart } from '../../context/CartContext'
 import { CART_CONTEXT_ACTIONS } from '../../constants'
 import customAxios from '../../api/axios'
 
-const PastOrderCard = ({data}) => {
+const PastOrderCard = (data) => {
 
   const { dispatch } = useCart()
   const navigate = useNavigate()
@@ -40,13 +40,13 @@ const PastOrderCard = ({data}) => {
     <Stack spacing={5} justify="space-between" style={{borderRadius:'5px',border:'1px solid #dbdbd8',padding:'8px 4px'}}>
       <Group position='apart'  style={{borderBottom: '1px dashed grey',paddingBottom:'5px'}}>
       <Text fz={13} fs={'italic'}>Created At: {new Date(data.createdAt).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})}</Text>
-      <Chip size="xs" radius="sm" color={'red'}>{data?.orderType === 7 ? 'Dine In':'Take Out'}</Chip>
+      <Chip size="xs" radius="sm" checked={true} color={data.paymentStatus === 'SXS' ? 'green' : 'red'}>{data?.orderType === 7 ? 'Dine In':'Take Out'}</Chip>
       </Group>
       <Stack spacing={1.5}>
         {data?.items?.map(obj => {
             return(
-                <Group position='apart' key={obj?.itemId} style={{border:"1px solid #dbdbd8",borderRadius:'4px',padding:'4px 8px'}}>
-                    <Text fz={12} c='dimmed'>{obj?.itemName}</Text>
+                <Group position='apart' key={obj?.itemId} style={{padding:'4px 8px'}}>
+                    <Text fz={12} c='dimmed' transform={'capitalize'}>{obj?.itemName}</Text>
                     <Text fz={12} c='dimmed'>₹{obj?.perPrice*obj?.qty}</Text>
                     <Text fz={12} c='dimmed'>QTY: {obj?.qty}</Text>
                 </Group>

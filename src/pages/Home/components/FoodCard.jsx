@@ -22,7 +22,7 @@ const CounterButtons = ({name}) => {
   )
 }
 
-const FoodCard = ({data}) => {
+const FoodCard = (data) => {
   const { cartState,dispatch } = useCart()
 
   const addItemToCart = () => dispatch({

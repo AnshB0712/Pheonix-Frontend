@@ -10,7 +10,7 @@ import AuthModal from './AuthModal'
 import OtplessSdk from "otpless-js-sdk";
 import StatusPage from '../pages/Status'
 import ProtectedRoute from './ProtectedRoute'
-import getTokenFromLocalStorage from '../utils/getTokenFromLocalStorage'
+import PersistLogin from './PersistLogin'
 
 
 const AppShell = ({colorScheme,toggleColorScheme}) => {
@@ -27,7 +27,7 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
     const state = getState()
 
     useEffect(() => {
-      if(!token || !state || getTokenFromLocalStorage()) return
+      if(!token || !state || localStorage.getItem('user')) return
       setOpenAuthModal(true)
     },[token,state])
 
@@ -39,11 +39,13 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
       header={<Header open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme} setOpenAuthModal={setOpenAuthModal}/>}
       >
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route element={<ProtectedRoute/>}>
-          <Route path='/my-orders' element={<MyOrders/>}/>
-          <Route path='/order/:orderId' element={<StatusPage/>}/>
+        <Route element={<PersistLogin/>}>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+          <Route element={<ProtectedRoute/>}>
+            <Route path='/my-orders' element={<MyOrders/>}/>
+            <Route path='/order/:orderId' element={<StatusPage/>}/>
+          </Route>
         </Route>
       </Routes>
       <AuthModal openAuthModal={openAuthModal} setOpenAuthModal={setOpenAuthModal}/>

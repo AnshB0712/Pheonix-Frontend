@@ -5,10 +5,21 @@ import OrderDetails from './components/OrderDetails'
 import Waves from './components/Waves'
 import useGetOrderStatus from '../../hooks/useGetOrderStatus'
 import EmptyStateComponent from '../../components/EmptyStateComponent'
+import { useCart } from '../../context/CartContext'
+import { useEffect } from 'react'
+import { CART_CONTEXT_ACTIONS } from '../../constants'
 
 const StatusPage = () => {
   const { orderId } = useParams()
-  const {data, error, isLoading} = useGetOrderStatus(orderId)
+  const {data, isLoading} = useGetOrderStatus(orderId)
+  const {dispatch} = useCart()
+
+  useEffect(() => {
+    if(data?.data?.paymentStatus === 'SXS'){
+      dispatch({type: CART_CONTEXT_ACTIONS.DELETE_CART})
+      localStorage.removeItem('order')
+    }
+  },[data?.data])
 
   if(isLoading) return <EmptyStateComponent index={'3'}/>
   
@@ -18,7 +29,7 @@ const StatusPage = () => {
     fullScreen 
     opened 
     withCloseButton={false}>
-        <Waves id={data?.data?._id} paymentStatus={data?.data?.paymentStatus}/>
+        <Waves id={data?.data?._id} paymentstatus={data?.data?.paymentStatus}/>
         <Paper style={{padding:'10px'}}>
             <OrderDetails data={data?.data}/>
         </Paper>

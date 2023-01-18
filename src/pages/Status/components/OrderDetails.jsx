@@ -10,12 +10,12 @@ const OrderDetails = ({data}) => {
     })}>
         <Text ta={'left'} fw={500}>Order Details's</Text>
         <Stack>
-          {Object.entries(data).map(([key,value]) => {
+          {Object.entries(data).map(([key,value],i) => {
             if(key === '_id' || key === 'orderBy' || key === 'updatedAt' || key === '__v') return
 
             if(key === 'orderType'){
               return (
-                <Group>
+                <Group key={i}>
                 <Text>{`${key}:`}</Text>
                 <Text fw={500}>
                   {(value == '7' ? "Dine In":"Take Out")}
@@ -26,7 +26,7 @@ const OrderDetails = ({data}) => {
 
             if(key === 'createdAt'){
               return (
-                <Group>
+                <Group key={i}>
                 <Text>{`${key}:`}</Text>
                 <Text fw={500}>
                   {new Date(value).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})}
@@ -37,7 +37,7 @@ const OrderDetails = ({data}) => {
 
             if(key === 'amount'){
               return (
-                <Group>
+                <Group key={i}>
                 <Text>{`${key}:`}</Text>
                 <Text fw={500}>
                   {`${value} INR`}
@@ -48,7 +48,7 @@ const OrderDetails = ({data}) => {
 
             if(key === 'orderStatus' || key === 'paymentStatus'){
               return (
-                <Group>
+                <Group key={i}>
                 <Text>{`${key}:`}</Text>
                 <Badge variant='filled' bg={value==='PNDG' ? 'yellow': value==='FLD' ? 'red':'green'}>{value==='PNDG' ? 'Pending': value==='FLD' ? 'Failed':'Success'}</Badge>
               </Group>
@@ -57,15 +57,15 @@ const OrderDetails = ({data}) => {
 
             if(key === 'items'){
               return (
-              <Group>
+              <Group key={i}>
               <Text>{`${key}:`}</Text>
               <List>
                 <List.Item>
                   {
-                  value.map(obj => Object.entries(obj).map(([key,value]) => {
+                  value.map(obj => Object.entries(obj).map(([key,value],i) => {
                   if(key==='_id' || key==='perPrice' || key==='itemId') return
                   return(
-                  <Group>
+                  <Group key={i}>
                   <Text>{`${key}:`}</Text>
                   <Text fw={500}>
                     {value}
@@ -79,7 +79,7 @@ const OrderDetails = ({data}) => {
             }
 
             return (
-            <Group>
+            <Group key={i}>
               <Text>{`${key}:`}</Text>
               <Text fw={500}>
                 { key === 'orderType' && (value === '7' ? "Dine In":"Take Out")}

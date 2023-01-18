@@ -17,8 +17,8 @@ const IconStyle = {
 
 const Waves = (props) => {
 
- const colorOfWaves = props.paymentStatus === 'PNDG' ? '#f9b200': props.paymentStatus === 'SXS' ? '#00d084' : '#f44336'
- const statusIcon =  props.paymentStatus === 'PNDG' ? <Exclamation style={{...IconStyle,height:'100px'}} /> : props.paymentStatus === 'SXS' ? <SuccessIcon style={IconStyle}/> : <Cancel style={IconStyle}/>
+ const colorOfWaves = props.paymentstatus === 'PNDG' ? '#f9b200': props.paymentstatus === 'SXS' ? '#00d084' : '#f44336'
+ const statusIcon =  props.paymentstatus === 'PNDG' ? <Exclamation style={{...IconStyle,height:'100px'}} /> : props.paymentstatus === 'SXS' ? <SuccessIcon style={IconStyle}/> : <Cancel style={IconStyle}/>
   return (
     <div style={{overflow:'hidden',position:'relative'}}>
         <svg

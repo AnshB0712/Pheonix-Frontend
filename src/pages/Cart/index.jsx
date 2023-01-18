@@ -6,11 +6,7 @@ import BillBox from './components/BillBox'
 import CartCard from './components/CartCard'
 import EmptyStateComponent from '../../components/EmptyStateComponent'
 import PaymentButton from './components/PaymentButton'
-import { useState } from 'react'
-
-const DataDisplay = ({data}) => {
-  return (data.map(item => <CartCard key={item._id} data={item}/>))
-}
+import DisplayData from '../../components/DisplayData'
 
 const Cart = () => {
   const {cartState,totalValue,orderItems,setOrderType} = useCart()
@@ -18,7 +14,7 @@ const Cart = () => {
   const isCartEmpty = () => Boolean(cartState.length)
 
   return (
-    <>
+    <section style={{paddingBottom:'55px'}}>
       <Group position='apart'>
         <Title order={5}>Order Summary</Title>
         <Group position='apart' align={'center'} spacing={5}>
@@ -28,7 +24,7 @@ const Cart = () => {
         </Group>
       </Group>
       <div style={{padding:"10px 0",maxHeight:'400px',overflow:'scroll'}}>
-        {!isCartEmpty() ?  <EmptyStateComponent index={'2'}/> : <DataDisplay data={cartState}/>}
+        {!isCartEmpty() ?  <EmptyStateComponent index={'2'}/> : <DisplayData data={cartState} Component={CartCard}/>}
       </div>
         {isCartEmpty() &&  <BillBox totalValue={totalValue} items={orderItems}/>}
         {!isCartEmpty() && 
@@ -38,7 +34,7 @@ const Cart = () => {
           </Button>
         </Center>}
         {isCartEmpty() && <PaymentButton/>}
-    </>
+    </section>
   )
 }
 

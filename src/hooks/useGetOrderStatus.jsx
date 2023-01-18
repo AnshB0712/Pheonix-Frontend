@@ -1,9 +1,10 @@
 import useSWR from 'swr'
-import customAxios from '../api/axios'
+import usePrivateAxios from './usePrivateAxios'
 
-const fetcher = (args) => customAxios.get(...args).then(({data}) => data)
 
 const useGetOrderStatus = (orderId) => {
+  const customAxios = usePrivateAxios()
+  const fetcher = (args) => customAxios.get(...args).then(({data}) => data)
   const { data,error,isLoading } = useSWR([`shared/order`,{params:{orderId}}],fetcher,{
     refreshInterval: 60000
   })

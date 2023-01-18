@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import useSWRMutation from 'swr/mutation'
-import customAxios from '../api/axios'
 import { CART_CONTEXT_ACTIONS } from '../constants'
 import { useCart } from '../context/CartContext'
+import usePrivateAxios from '../hooks/usePrivateAxios'
 import { loadDynamicScript, removeAppendedScript } from '../payment/loadScript'
 
 const useCreateOrder = () => {
@@ -10,10 +10,9 @@ const useCreateOrder = () => {
   const { dispatch } = useCart()
   const [isLoading,setIsLoading] = useState(false)
   const [error,setError] = useState(null)
+  const customAxios = usePrivateAxios()
 
   const stopLoadingUI = () => {
-    dispatch({type: CART_CONTEXT_ACTIONS.DELETE_CART})
-    localStorage.removeItem('order')
     setIsLoading(false)
   }
 
