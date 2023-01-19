@@ -6,7 +6,7 @@ import { useCart } from '../../../context/CartContext'
 
 const ViewCartBottomBar = () => {
     const navigate = useNavigate()
-    const { totalValue } = useCart()
+    const { totalValue,takeOutCharges } = useCart()
 
     if(!totalValue) return null
 
@@ -23,7 +23,7 @@ const ViewCartBottomBar = () => {
             <Text color={'#fff'} fw={600} fz={16}>View Cart</Text>
             <IconReceipt color='#fff'/>
         </Group>
-        <Text color={'#fff'} fw={600} fz={16}>{`₹${totalValue}`}</Text>
+        <Text color={'#fff'} fw={600} fz={16}>{`₹${totalValue + takeOutCharges}`}</Text>
     </Group>
   )
 }

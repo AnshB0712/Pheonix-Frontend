@@ -21,8 +21,8 @@ const MyOrders = () => {
         { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={error.message} index={'1'}/> }
         { data?.data && <DisplayData Component={PastOrderCard} data={data.data}/>}
       </CardContainer>
-      <Pagination total={data.totalPages} onChange={index => setPage(index)} page={page} position='center'/>
-    </>
+        { data && <Pagination total={data.totalPages} onChange={index => setPage(index)} page={page} position='center'/>}    
+        </>
   )
 }
 

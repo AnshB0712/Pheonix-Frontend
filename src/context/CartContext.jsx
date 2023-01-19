@@ -40,22 +40,23 @@ const CartContextProvider = ({children}) => {
 
     // TO PERSIST CART BETWEEN SIGNUPS AS FOR SIGN UP USER WILL GO TO DIFFERENT TAB
     const localStorageOrder = localStorage.getItem('order')
-
+    
     const [cartState,dispatch] = useReducer(reducer,localStorageOrder ? JSON.parse(localStorageOrder)['cart'] : [])
+    
+    // ORDER TYPE DINE OR TAKE OUT
+    const [orderType,setOrderType] = useState(localStorageOrder ? JSON.parse(localStorageOrder)['orderType'] : '7')
 
     // DERIVED STATES
     const totalValue = cartState.reduce((acc,cur)=>{ return acc + cur.qty*cur.perPrice},0)
     const orderItems = cartState.map(item => ({itemName:item.name,itemId:item._id,qty:item.qty,perPrice:item.perPrice}))
-
-    // ORDER TYPE DINE OR TAKE OUT
-    const [orderType,setOrderType] = useState(localStorageOrder ? JSON.parse(localStorageOrder)['orderType'] : '7')
+    const takeOutCharges = orderType == '13'? cartState.reduce((acc,cur)=>{ return acc + cur.qty*10},0) : 0;
 
     useEffect(() => {
         localStorage.setItem('order',JSON.stringify({cart:cartState,orderType}))
     },[cartState,orderType])
 
     return (
-        <CartContext.Provider value={{cartState,dispatch,setOrderType,orderType,totalValue,orderItems}}>
+        <CartContext.Provider value={{cartState,dispatch,setOrderType,orderType,totalValue,orderItems,takeOutCharges}}>
             {children}
         </CartContext.Provider>
     )

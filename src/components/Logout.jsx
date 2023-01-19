@@ -31,6 +31,7 @@ const Logout = ({ icon, color, label , to, setOpen}) => {
         localStorage.removeItem('user');
         setUser(null)
         setOpen(false)
+        localStorage.removeItem('user')
     }}
   >
     <Group>

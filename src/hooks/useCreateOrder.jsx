@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import useSWRMutation from 'swr/mutation'
-import { CART_CONTEXT_ACTIONS } from '../constants'
-import { useCart } from '../context/CartContext'
 import usePrivateAxios from '../hooks/usePrivateAxios'
 import { loadDynamicScript, removeAppendedScript } from '../payment/loadScript'
 
 const useCreateOrder = () => {
 
-  const { dispatch } = useCart()
   const [isLoading,setIsLoading] = useState(false)
   const [error,setError] = useState(null)
   const customAxios = usePrivateAxios()
@@ -19,7 +16,7 @@ const useCreateOrder = () => {
   const createOrder = async (url, {arg}) => {
       try {
         setIsLoading(true)
-        const {data:{objectId,amount }} = await customAxios.post(url, arg)
+        const {data:{objectId,amount}} = await customAxios.post(url, arg);
         const {data:{response:{body}}} = await customAxios.post('/payment/paytm', {
             orderId: objectId,
             userId: arg.orderBy,

@@ -6,7 +6,7 @@ import { useAuth } from '../../../context/AuthContext'
 import useCreateOrder from '../../../hooks/useCreateOrder'
 
 const PaymentButton = () => {
-    const {totalValue,orderItems,orderType} = useCart()
+    const {totalValue,orderItems,orderType,takeOutCharges} = useCart()
     const {user} = useAuth()
     const {trigger,isLoading,error} = useCreateOrder()
 
@@ -16,7 +16,8 @@ const PaymentButton = () => {
         orderByMobile: user.mobile,
         orderBy: user.id,
         orderType: orderType,
-        amount: totalValue,
+        amount: totalValue+takeOutCharges,
+        takeOutCharges,
         items: orderItems
       }
       trigger(order)
@@ -26,7 +27,7 @@ const PaymentButton = () => {
     <Group gutter={0} style={{position:'fixed',bottom:'0',left:'0',width:'100%'}}>
         <Tooltip withArrow={true} arrowPosition='center' label={error?.message || "Sign up to continue with the payment."} offset={5} opened={!user || error?.message}>
             <Button radius={0} loading={isLoading} onClick={handlePayment} disabled={!user} size={'lg'} fullWidth leftIcon={<IconShieldLock/>}>
-                {`Pay ₹${totalValue}`}
+                {`Pay ₹${totalValue+takeOutCharges}`}
             </Button>
         </Tooltip>
     </Group>

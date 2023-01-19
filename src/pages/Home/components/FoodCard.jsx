@@ -54,7 +54,7 @@ const FoodCard = (data) => {
         alignItems:"flex-start",
         padding:"5px 10px",
     }}>
-        <Title order={5}>{data?.name}</Title>
+        <Title order={5} transform={'capitalize'}>{data?.name}</Title>
         <Badge
         variant='outline'
         size='sm'

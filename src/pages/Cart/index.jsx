@@ -9,7 +9,7 @@ import PaymentButton from './components/PaymentButton'
 import DisplayData from '../../components/DisplayData'
 
 const Cart = () => {
-  const {cartState,totalValue,orderItems,setOrderType} = useCart()
+  const {cartState,totalValue,orderItems,setOrderType,takeOutCharges} = useCart()
  
   const isCartEmpty = () => Boolean(cartState.length)
 
@@ -26,7 +26,7 @@ const Cart = () => {
       <div style={{padding:"10px 0",maxHeight:'400px',overflow:'scroll'}}>
         {!isCartEmpty() ?  <EmptyStateComponent index={'2'}/> : <DisplayData data={cartState} Component={CartCard}/>}
       </div>
-        {isCartEmpty() &&  <BillBox totalValue={totalValue} items={orderItems}/>}
+        {isCartEmpty() &&  <BillBox totalValue={totalValue} items={orderItems} takeOutCharges={takeOutCharges}/>}
         {!isCartEmpty() && 
         <Center>
           <Button variant='subtle' style={{textDecoration:'underline'}} component={Link} to='/'>
