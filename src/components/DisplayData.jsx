@@ -1,11 +1,12 @@
 /* eslint-disable react/destructuring-assignment */
 import { Text } from '@mantine/core';
 import React from 'react';
+import EmptyStateComponent from './EmptyStateComponent';
 
 function DisplayData({ data, Component, componentProps }) {
-  if (!data) { return (<Text>Data is a falsy value</Text>); }
+  if (!data) { return <EmptyStateComponent index={'1'}/> }
 
-  if (!data.length) { return (<Text>Data is a Empty</Text>); }
+  if (!data.length) { return <EmptyStateComponent index={'0'}/> }
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading

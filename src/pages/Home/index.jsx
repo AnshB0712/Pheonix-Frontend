@@ -15,14 +15,14 @@ const Home = () => {
 
   return (
     <>
-    <UserBox/>
-    <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-    <CardContainer>
-      { isLoading && <EmptyStateComponent index={'3'}/> }
-      { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={error.message} index={'1'}/> }
-      { data?.data &&  <DisplayData data={data.data} Component={FoodCard}/> }
-    </CardContainer>
-    <ViewCartBottomBar/>
+      <UserBox/>
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+        <CardContainer>
+          { isLoading && <EmptyStateComponent index={'3'}/> }
+          { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={JSON.stringify(error.response.data)} index={'1'}/> }
+          {data?.data &&  <DisplayData data={data.data} Component={FoodCard}/> }
+        </CardContainer>
+      <ViewCartBottomBar/>
     </>
   )
 }

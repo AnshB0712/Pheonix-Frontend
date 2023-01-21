@@ -17,9 +17,9 @@ const MyOrders = () => {
         <Text fs={'italic'}>{`Total Orders: ${data?.totalOrders || '-'}`}</Text>
       </Group>
       <CardContainer>
-        { isLoading && <EmptyStateComponent index='3'/> }
-        { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={error.message} index={'1'}/> }
         { data?.data && <DisplayData Component={PastOrderCard} data={data.data}/>}
+        { isLoading && <EmptyStateComponent index='3'/> }
+        { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={JSON.stringify(error.response.data)} index={'1'}/> }
       </CardContainer>
         { data && <Pagination total={data.totalPages} onChange={index => setPage(index)} page={page} position='center'/>}    
         </>

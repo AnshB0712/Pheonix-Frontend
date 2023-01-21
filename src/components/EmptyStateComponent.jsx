@@ -23,9 +23,7 @@ const LookUpObject = {
     },
     3: {
         component: (
-          <Center style={{height:'500px'}}>
-            <Loader size={'sm'}/>
-          </Center>
+            <Loader size={'sm'} mt={200}/>
         ),
     },
     4: {

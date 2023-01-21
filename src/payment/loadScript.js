@@ -28,11 +28,10 @@ function buildForm(data) {
   return form;
 }
 
-export const loadDynamicScript = (data,stopLoadingUI) => {
+export const loadDynamicScript = (data) => {
   const paytmForm = buildForm(data);
   document.body.appendChild(paytmForm);
   paytmForm.submit();
-  stopLoadingUI()
 };
 
 export const removeAppendedScript = () => {

@@ -1,5 +1,4 @@
 import { Group, Modal,Space,Text } from '@mantine/core'
-import axios from 'axios'
 import OTPlessSdk from 'otpless-js-sdk'
 import React, { useEffect, useState } from 'react'
 import customAxios from '../api/axios'
@@ -8,7 +7,7 @@ import WhatsAppButton from './WhatsAppButton'
 
 const AuthModal = ({openAuthModal,setOpenAuthModal,fetchingUser}) => {
     const [wait,setWait] = useState(false)
-    const [error,setError] = useState('')
+    const [error,setError] = useState(undefined)
     const {setUser} = useAuth()
 
     const {getState,getToken} = OTPlessSdk(

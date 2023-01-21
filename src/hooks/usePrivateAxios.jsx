@@ -20,15 +20,20 @@ const usePrivateAxios = () => {
     const responseInterceptor = customAxios.interceptors.response.use(
       (res) => res,
       async (err) => {
-        const prevReq = err?.config;
-        if (err?.response?.status === 403 && !prevReq?.sent) {
-          prevReq.sent = true;
-          const newAccessToken = await refreshAccessToken();
-          setUser({ token: newAccessToken });
-          prevReq.headers.authorization = `Bearer ${newAccessToken}`;
-          return customAxios(prevReq);
+        try {
+          const prevReq = err?.config;
+          if (err?.response?.status === 403 && !prevReq?.sent) {
+            prevReq.sent = true;
+            const newAccessToken = await refreshAccessToken();
+            setUser(p => ({ ...p,token: newAccessToken }));
+            prevReq.headers.authorization = `Bearer ${newAccessToken}`;
+            return customAxios(prevReq);
+          }
+          return Promise.reject(err);
+        } catch (error) {
+          localStorage.removeItem('user')
+          setUser(null)
         }
-        return Promise.reject(err);
       },
     );
     return () => {
