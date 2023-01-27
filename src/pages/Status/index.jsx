@@ -1,4 +1,4 @@
-import { Loader, Modal, Paper } from '@mantine/core'
+import { Modal, Paper } from '@mantine/core'
 import { useParams } from 'react-router-dom'
 import React from 'react'
 import OrderDetails from './components/OrderDetails'

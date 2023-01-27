@@ -44,7 +44,9 @@ const FoodCard = (data) => {
         padding: "5px",
         border: "1px solid #CED4DA",
         borderRadius: "5px",
-        overflow: "hidden"
+        overflow: "hidden",
+        filter: `grayscale(${data.inStock ? '0%':'80%'})`,
+        pointerEvents: data.inStock ? 'auto':'none'
     }}>
     <Image fit='cover' src={data?.imageURL} alt={data?.name}/>
     <div 
@@ -53,6 +55,7 @@ const FoodCard = (data) => {
         flexDirection:"column",
         alignItems:"flex-start",
         padding:"5px 10px",
+        position: 'relaive'
     }}>
         <Title order={5} transform={'capitalize'}>{data?.name}</Title>
         <Badge
