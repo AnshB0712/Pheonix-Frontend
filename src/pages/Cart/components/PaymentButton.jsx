@@ -14,8 +14,6 @@ const PaymentButton = () => {
     const handlePayment = async () => {
         const order = {
           orderByName: user.name,
-          orderByMobile: user.mobile,
-          orderBy: user.id,
           orderType: orderType,
           amount: totalValue+takeOutCharges,
           takeOutCharges,

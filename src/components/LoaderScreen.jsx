@@ -3,7 +3,7 @@ import React from 'react'
 
 const LoaderScreen = () => {
   return (
-    <Center style={{width:"100%",minHeight:"300px"}}>
+    <Center>
       <Loader size={'sm'}/>
     </Center>
   )

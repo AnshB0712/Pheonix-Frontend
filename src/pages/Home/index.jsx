@@ -7,6 +7,7 @@ import EmptyStateComponent from '../../components/EmptyStateComponent'
 import useGetDishes from '../../hooks/useGetDishes'
 import ViewCartBottomBar from './components/ViewCartBottomBar'
 import DisplayData from '../../components/DisplayData'
+import LoaderScreen from '../../components/LoaderScreen'
 
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
       <UserBox/>
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
         <CardContainer>
-          { isLoading && <EmptyStateComponent index={'3'}/> }
+          { isLoading && <LoaderScreen/> }
           { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={JSON.stringify(error.response.data)} index={'1'}/> }
           {data?.data &&  <DisplayData data={data.data} Component={FoodCard}/> }
         </CardContainer>

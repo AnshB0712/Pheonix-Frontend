@@ -1,4 +1,4 @@
-import { Center, Group, Loader, Text, Title } from '@mantine/core'
+import { Center, Group, Loader, LoadingOverlay, Text, Title } from '@mantine/core'
 import React from 'react'
 import { ReactComponent as Puzzle } from "../assets/Puzzle.svg";
 import { ReactComponent as ErrorServer } from "../assets/ErrorServer.svg";
@@ -22,9 +22,7 @@ const LookUpObject = {
         body: "Add some items to the cart and then come back here."
     },
     3: {
-        component: (
-            <Loader size={'sm'} mt={200}/>
-        ),
+        component: (<LoadingOverlay visible/>),
     },
     4: {
         component: <ErrorRocket style={{width:'70%'}}/>,

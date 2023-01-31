@@ -15,21 +15,6 @@ import PersistLogin from './PersistLogin'
 
 const AppShell = ({colorScheme,toggleColorScheme}) => {
     const [open,setOpen] = useState(false)
-    const [openAuthModal,setOpenAuthModal] = useState(false)
-  
-    const {getState,getToken} = OtplessSdk(
-      {
-          appId: import.meta.env.VITE_APP_ID,
-          enableErrorLogging: true
-    });
-
-    const token = getToken()
-    const state = getState()
-
-    useEffect(() => {
-      if(!token || !state || localStorage.getItem('user')) return
-      setOpenAuthModal(true)
-    },[token,state])
 
   return (
     <MantineAppShell
@@ -41,6 +26,7 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
       <Routes>
         <Route element={<PersistLogin/>}>
           <Route path='/' element={<Home/>}/>
+          <Route path='/auth' element={<AuthModal />}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route element={<ProtectedRoute/>}>
             <Route path='/my-orders' element={<MyOrders/>}/>
@@ -48,7 +34,6 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
           </Route>
         </Route>
       </Routes>
-      <AuthModal openAuthModal={openAuthModal} setOpenAuthModal={setOpenAuthModal}/>
     </MantineAppShell>
   )
 }
