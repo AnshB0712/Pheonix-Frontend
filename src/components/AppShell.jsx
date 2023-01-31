@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {AppShell as MantineAppShell} from "@mantine/core"
 import Navbar from './Navbar'
 import Header from './Header'
@@ -7,7 +7,6 @@ import Home from '../pages/Home'
 import MyOrders from '../pages/MyOrders'
 import Cart from '../pages/Cart'
 import AuthModal from './AuthModal'
-import OtplessSdk from "otpless-js-sdk";
 import StatusPage from '../pages/Status'
 import ProtectedRoute from './ProtectedRoute'
 import PersistLogin from './PersistLogin'
@@ -21,7 +20,7 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
       padding="sm"
       navbarOffsetBreakpoint="sm"
       navbar={<Navbar open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>}
-      header={<Header open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme} setOpenAuthModal={setOpenAuthModal}/>}
+      header={<Header open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>}
       >
       <Routes>
         <Route element={<PersistLogin/>}>

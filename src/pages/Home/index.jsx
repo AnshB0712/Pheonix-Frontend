@@ -20,7 +20,7 @@ const Home = () => {
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
         <CardContainer>
           { isLoading && <LoaderScreen/> }
-          { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={JSON.stringify(error.response.data)} index={'1'}/> }
+          { error && <EmptyStateComponent title={`${error.code}: ${error.name}`} body={JSON.stringify(error?.response?.data)} index={'1'}/> }
           {data?.data &&  <DisplayData data={data.data} Component={FoodCard}/> }
         </CardContainer>
       <ViewCartBottomBar/>
