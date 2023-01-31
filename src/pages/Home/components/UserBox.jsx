@@ -19,7 +19,7 @@ const UserBox = () => {
           <Text size={14} fs="italic" color={'dimmed'}>PU Campus,Waghodia</Text>
         </div>
       </div>
-      <Avatar color="blue" radius="xl">{user ? getInitialsFromString(user.name) : "GU"}</Avatar>
+      <Avatar color="blue" radius="xl">{(user.name) || "GU"}</Avatar>
     </Group>
   )
 }
