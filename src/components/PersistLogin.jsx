@@ -27,7 +27,7 @@ const PersistLogin = () => {
 
   return (
     user 
-    ? loading ? <LoadingOverlay visible/> : <Outlet/> 
+    ? loading ? <LoadingOverlay visible={loading}/> : <Outlet/> 
     : <Outlet/>
   )
 }

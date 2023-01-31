@@ -1,14 +1,35 @@
 import { Group, Text, ThemeIcon, UnstyledButton } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons'
 import React from 'react'
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import customAxios from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 
-const Logout = ({ icon, color, label , to, setOpen}) => {
+const Logout = ({ icon, color, label , to}) => {
     const { setUser } = useAuth()
+    const [meta,setMeta] = useState({
+      loading: false,
+      error: undefined
+    })
+
+    const handlLogout = async () => {
+      setMeta(p => ({...p,loading:true}))
+      try {
+        await customAxios.get('shared/logout')
+        setUser('')
+      } catch (error) {
+        console.log(error)
+        setMeta(p => ({...p,error}))
+      } finally {
+        setMeta(p => ({...p, loading: false}))
+      }
+    }
+
 
   return (
     <UnstyledButton
+    loading={meta.loading}
     sx={(theme) => ({
       display: 'flex',
       alignItems:"center",
@@ -27,12 +48,7 @@ const Logout = ({ icon, color, label , to, setOpen}) => {
     })}
     component={NavLink}
     to={to}
-    onClick={() => {
-        localStorage.removeItem('user');
-        setUser(null)
-        setOpen(false)
-        localStorage.removeItem('user')
-    }}
+    onClick={handlLogout}
   >
     <Group>
       <ThemeIcon color={color} variant="light">
