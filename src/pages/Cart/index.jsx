@@ -9,7 +9,7 @@ import PaymentButton from './components/PaymentButton'
 import DisplayData from '../../components/DisplayData'
 
 const Cart = () => {
-  const {cartState,totalValue,orderItems,setOrderType,takeOutCharges} = useCart()
+  const {cartState,totalValue,orderItems,orderType,setOrderType,takeOutCharges} = useCart()
  
   const isCartEmpty = () => Boolean(cartState.length)
 
@@ -19,7 +19,7 @@ const Cart = () => {
         <Title order={5}>Order Summary</Title>
         <Group position='apart' align={'center'} spacing={5}>
           <Text fz={14} fw={500} style={{paddingTop:"1.5px"}}>Take Out</Text>
-            <Switch defaultChecked={true} onChange={e => setOrderType(e.target.checked ? '7':'13')} style={{display:"grid"}}/>
+            <Switch checked={orderType == '7' ? true : false} onChange={e => setOrderType(e.target.checked ? '7':'13')} style={{display:"grid"}}/>
           <Text fz={14} fw={500} style={{paddingTop:"1.5px"}}>Dine In</Text>
         </Group>
       </Group>

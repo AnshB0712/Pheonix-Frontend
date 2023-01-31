@@ -6,8 +6,7 @@ import { CART_CONTEXT_ACTIONS } from '../../constants'
 import customAxios from '../../api/axios'
 
 const PastOrderCard = (data) => {
-
-  const { dispatch } = useCart()
+  const { dispatch,setOrderType } = useCart()
   const navigate = useNavigate()
 
   const [loading,setLoading] = useState(false)
@@ -27,10 +26,11 @@ const PastOrderCard = (data) => {
         return cart
       }
       dispatch({type:CART_CONTEXT_ACTIONS.SET_CART, payload: createCart(orderItems,data.items)})
+      setOrderType(data.orderType)
       navigate('/cart')
     } catch (error) {
       console.log(error)
-      setError(err)
+      setError(error)
     } finally{
       setLoading(false)
     }

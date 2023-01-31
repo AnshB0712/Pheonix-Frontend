@@ -14,9 +14,7 @@ const useGetAllPastOrders = (page) => {
     const fetchOrders = async () => {
       try {
         const response = await customAxios.get(`user/get-all-orders`,{
-          params:{
-            page:page
-          },
+          params:{page},
           signal: controller.signal
         })
         setState({
