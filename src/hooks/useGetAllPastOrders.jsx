@@ -4,14 +4,10 @@ import usePrivateAxios from './usePrivateAxios'
 
 const useGetAllPastOrders = (page) => {
   const customAxios = usePrivateAxios()
-  const { user } = useAuth()
   const [state,setState] = useState({
     data: undefined,
-    error: undefined,
-    loading: true
-  })
-
-  useEffect(() => console.log(state.error),[state.error])
+    error: undefined
+    })
 
   useEffect(() => {
     const controller = new AbortController()
@@ -19,7 +15,6 @@ const useGetAllPastOrders = (page) => {
       try {
         const response = await customAxios.get(`user/get-all-orders`,{
           params:{
-            userId: user.id,
             page:page
           },
           signal: controller.signal
@@ -34,15 +29,13 @@ const useGetAllPastOrders = (page) => {
           data: undefined,
           error: error
         })
-      } finally {
-        setState(p => ({...p,loading:false}))
       }
     }
     fetchOrders()
     return () => controller.abort()
-  },[page,user?.id])
+  },[page])
 
-  return ({ data: state.data,error: state.error,isLoading: state.loading })
+  return ({ data: state.data,error: state.error,isLoading: !state.data && !state.error })
 }
 
 export default useGetAllPastOrders

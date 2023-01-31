@@ -15,7 +15,7 @@ const WhatsAppButton = ({wait,setWait,setError}) => {
     const handleClick = async () => {
       try {
         setWait(true)
-        await createGetIntentOnClick({redirectionURL: location.href.split('?')[0]})()
+        await createGetIntentOnClick({redirectionURL: `${import.meta.env.VITE_FRONTEND_URL}/auth`})()
       } catch (error) {
         console.log(error);
         setError(error)

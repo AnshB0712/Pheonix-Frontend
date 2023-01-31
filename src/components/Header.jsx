@@ -2,6 +2,7 @@ import React from 'react'
 import {ActionIcon, Burger, Button, Header as MantineHeader, MediaQuery, Title} from "@mantine/core"
 import { IconSun, IconMoonStars } from '@tabler/icons';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Header = ({setOpen,open,colorScheme,toggleColorScheme,setOpenAuthModal}) => {
   const {user} = useAuth()
@@ -10,8 +11,7 @@ const Header = ({setOpen,open,colorScheme,toggleColorScheme,setOpenAuthModal}) =
       {colorScheme === 'dark' ? <IconSun size={18} /> : <IconMoonStars size={18} />}
     </ActionIcon>
   ):(
-    <Button size="xs" onClick={() => {
-      setOpenAuthModal(p => !p)}}>
+    <Button size="xs" component={Link} to='/auth'>
       Sign Up
     </Button>
   )

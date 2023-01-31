@@ -31,7 +31,6 @@ const usePrivateAxios = () => {
           }
           return Promise.reject(err);
         } catch (error) {
-          localStorage.removeItem('user')
           setUser(null)
         }
       },
