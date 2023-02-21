@@ -8,26 +8,29 @@ import { LoadingOverlay } from '@mantine/core'
 import { Outlet } from 'react-router-dom'
 
 const PersistLogin = () => {
-    const { setUser,user } = useAuth()
+    const { user,dispatch } = useAuth()
     const [loading,setLoading] = useState(true)
-  
+
     useEffect(() => {
         const verifyRefreshToken = async () => {
             try {
                 const token = await refreshAccessToken()
                 const { name } = jwt_decode(token)
-                setUser({name,token})
+                dispatch({action: {type: 'USER_DATA',payload:{name,token}}})
                 setLoading(false)
             } catch (err) {
                 console.log(err);
+                setLoading(false)
+            }finally{
+                setLoading(false)
             }
         }
-        !user?.token ? verifyRefreshToken() : setLoading(false)
+        !user.user?.token ? verifyRefreshToken() : setLoading(false)
     },[])
 
   return (
-    user 
-    ? loading ? <LoadingOverlay visible={loading}/> : <Outlet/> 
+    user.user 
+    ? loading ? <LoadingOverlay visible/> : <Outlet/> 
     : <Outlet/>
   )
 }

@@ -1,6 +1,5 @@
 const getInitialsFromString = (string) => {
-    const [first,last] = string?.toUpperCase()?.split(' ')
-    return (string)
+    if(string) return (string[0])
 }
 
 export default getInitialsFromString

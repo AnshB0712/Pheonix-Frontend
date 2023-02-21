@@ -15,8 +15,6 @@ const useCreateOrder = () => {
             amount
           })
         loadDynamicScript({ orderId:objectId,txnToken:body?.txnToken })
-      } catch (error) {
-        throw new Error(error.response.data)
       } finally {
         removeAppendedScript()
       }      

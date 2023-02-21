@@ -13,13 +13,13 @@ const UserBox = () => {
       padding: theme.spacing.sm
     })}>
       <div>
-        <Text size={16}>{`Hi, ${user ? user?.name?.split('+')?.join(' ') : "Guest User"}!`}</Text>
+        <Text size={16}>{`Hi, ${ user.user?.name || "Guest User"}!`}</Text>
         <div style={{display:"flex",gap:'4px'}}>
           <IconMapPins color='#0d76c1'/>
           <Text size={14} fs="italic" color={'dimmed'}>PU Campus,Waghodia</Text>
         </div>
       </div>
-      <Avatar color="blue" radius="xl">{(user.name) || "GU"}</Avatar>
+      <Avatar color="blue" radius="xl">{getInitialsFromString(user.user?.name) || "GU"}</Avatar>
     </Group>
   )
 }

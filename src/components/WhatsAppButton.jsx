@@ -1,16 +1,17 @@
 import { Button } from '@mantine/core'
 import WhatsLogo from "./WhatsLogo"
-import React from 'react'
+import React, { useState } from 'react'
 import OtplessSdk from "otpless-js-sdk";
 
+const {createGetIntentOnClick} = OtplessSdk(
+    {
+        appId: import.meta.env.VITE_APP_ID,
+        enableErrorLogging: true
+  });
 
-const WhatsAppButton = ({wait,setWait,setError}) => {
+const WhatsAppButton = () => {
 
-    const {createGetIntentOnClick} = OtplessSdk(
-        {
-            appId: import.meta.env.VITE_APP_ID,
-            enableErrorLogging: true
-      });
+    const [wait,setWait] = useState(false)
 
     const handleClick = async () => {
       try {
@@ -18,7 +19,6 @@ const WhatsAppButton = ({wait,setWait,setError}) => {
         await createGetIntentOnClick({redirectionURL: `${import.meta.env.VITE_FRONTEND_URL}/auth`})()
       } catch (error) {
         console.log(error);
-        setError(error)
       } finally {
         setWait(false)
       }
