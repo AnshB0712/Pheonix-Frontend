@@ -53,7 +53,7 @@ const Navbar = ({open,setOpen,colorScheme,toggleColorScheme}) => {
     <MantineNavbar width={{ sm: 200, lg: 300 }} hidden={!open} height={'100%'} p="xs">
       <Links setOpen={setOpen}/>
       {/* DARK MODE SWITCH */}
-      { user?.token && <Logout icon={<IconPower size={18} />} label="Logout" color='red' to='/' setOpen={setOpen}/>}
+      { user.user?.token && <Logout icon={<IconPower size={18} />} label="Logout" color='red' to='/' setOpen={setOpen}/>}
       <MainLink icon={<IconMoonStars size={18}/>} label="Dark Mode" color='yellow' colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>
     </MantineNavbar>
   )

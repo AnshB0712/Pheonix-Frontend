@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Header = ({setOpen,open,colorScheme,toggleColorScheme,setOpenAuthModal}) => {
   const {user} = useAuth()
-  const RightSideComponent = () => user ? (
+  const RightSideComponent = () => user.user ? (
     <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
       {colorScheme === 'dark' ? <IconSun size={18} /> : <IconMoonStars size={18} />}
     </ActionIcon>

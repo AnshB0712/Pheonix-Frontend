@@ -13,7 +13,7 @@ const PaymentButton = () => {
 
     const handlePayment = async () => {
         const order = {
-          orderByName: user.name,
+          orderByName: user.user.name,
           orderType: orderType,
           amount: totalValue+takeOutCharges,
           takeOutCharges,
@@ -21,8 +21,6 @@ const PaymentButton = () => {
         }
         await trigger(order)
     }
-
-    console.log(error);
  
   return (
     <Group gutter={0} style={{position:'fixed',bottom:'0',left:'0',width:'100%'}}>
@@ -32,8 +30,8 @@ const PaymentButton = () => {
             textAlign: 'center',
             maxWidth: '340px'
           }
-        })}  color={Boolean(error) && 'red'} withArrow={true} arrowPosition='center' label={error?.message || 'Please SignUp to continue with your order.'} offset={5} opened={!user || Boolean(error)}>
-            <Button radius={0} loading={isLoading} onClick={handlePayment} disabled={!user} size={'lg'} fullWidth leftIcon={<IconShieldLock/>}>
+        })}  color={Boolean(error) && 'red'} withArrow={true} arrowPosition='center' label={error?.response?.data?.message || 'Please SignUp to continue with your order.'} offset={5} opened={!user || Boolean(error)}>
+            <Button radius={0} loading={isLoading} onClick={handlePayment} disabled={!user.user} size={'lg'} fullWidth leftIcon={<IconShieldLock/>}>
                 {`Pay ₹${totalValue+takeOutCharges}`}
             </Button>
         </Tooltip>
