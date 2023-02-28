@@ -9,14 +9,15 @@ const ORDER_STATUS_KEYS_LOOKUP = {
   'amount':'Amount',
   'takeOutCharges':'TakeOut-Charge',
   'items': 'Order',
-  'paymentStatus': 'Payment',
+  'paymentStatus': 'PaymentStatus',
   'createdAt': 'Date/Time',
+  'orderFailReason': 'OrderFail Due To'
 
 }
 
 const OrderDetails = ({data}) => {
   return (
-    <Group sx={theme => ({
+    <Group mt={8} sx={theme => ({
         border: `1px solid ${theme.colors.gray[4]}`,
         borderRadius: '8px',
         padding: theme.spacing.md
@@ -25,6 +26,7 @@ const OrderDetails = ({data}) => {
         <Stack>
           {Object.entries(data).map(([key,value],i) => {
             if(key === '_id' || key === 'orderBy' || key === 'updatedAt' || key === '__v') return
+            if(key === 'orderFailReason' && !value) return
 
             if(key === 'orderType'){
               return (
@@ -48,7 +50,7 @@ const OrderDetails = ({data}) => {
               )
             }
 
-            if(key === 'amount'){
+            if(key === 'amount' || key === 'takeOutCharges'){
               return (
                 <Group key={i}>
                 <Text>{`${ORDER_STATUS_KEYS_LOOKUP[key]} :`}</Text>
@@ -95,7 +97,6 @@ const OrderDetails = ({data}) => {
             <Group key={i}>
               <Text>{`${ORDER_STATUS_KEYS_LOOKUP[key]} :`}</Text>
               <Text fw={500}>
-                { key === 'orderType' && (value === '7' ? "Dine In":"Take Out")}
                 {''+value}
               </Text>
             </Group>
