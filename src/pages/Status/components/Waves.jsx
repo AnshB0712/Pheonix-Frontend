@@ -81,7 +81,7 @@ const Waves = (props) => {
              top:'20px',
              left:'20px',
         }} component={Link} to='/my-orders'>Back</Text>
-        <Text ta={'center'}>Order succesful with ID : <b>{props.id}</b></Text>
+        <Text ta={'center'}>Order ID : <b>{props.id}</b></Text>
     </div>
   )
 }

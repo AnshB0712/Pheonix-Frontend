@@ -1,5 +1,5 @@
-import { Modal, Paper } from '@mantine/core'
-import { useParams } from 'react-router-dom'
+import { Button, Loader, Paper, Stack, Text } from '@mantine/core'
+import { Link, useParams } from 'react-router-dom'
 import React from 'react'
 import OrderDetails from './components/OrderDetails'
 import Waves from './components/Waves'
@@ -8,6 +8,16 @@ import EmptyStateComponent from '../../components/EmptyStateComponent'
 import { useCart } from '../../context/CartContext'
 import { useEffect } from 'react'
 import { CART_CONTEXT_ACTIONS } from '../../constants'
+
+
+const PaymentProcessLoader = () => {
+  return (
+    <Stack spacing={7} p={8} align={'center'} justify='center' style={{height:'500px'}}>
+      <Loader size={'lg'} variant='dots' />
+      <Text ta={'center'} size={'sm'} fs='italic'>Please do not refresh while we confirm your payment status...</Text>
+    </Stack>
+  )
+}
 
 const StatusPage = () => {
   const { orderId } = useParams()
@@ -21,19 +31,16 @@ const StatusPage = () => {
     }
   },[data?.data])
 
-  if(isLoading) return <EmptyStateComponent index={'3'}/>
-  
+  if(isLoading) return <PaymentProcessLoader/>
+
   return (
-    <Modal 
-    styles={(theme) => ({modal: {padding:'0px !important'}})} 
-    fullScreen 
-    opened 
-    withCloseButton={false}>
+    <Paper>
         <Waves id={data?.data?._id} paymentstatus={data?.data?.paymentStatus}/>
-        <Paper style={{padding:'10px'}}>
+        <Paper>
             <OrderDetails data={data?.data}/>
         </Paper>
-    </Modal>
+        <Button component={Link} to='/my-orders' fullWidth size='md' variant='white' mt={10}>Back to MyOrders</Button>
+    </Paper>
   )
 }
 
