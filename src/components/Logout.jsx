@@ -18,9 +18,9 @@ const Logout = ({ icon, color, label , to}) => {
       justifyContent: 'space-between',
       width: '100%',
       background: '#2d2f3a',
-      padding: theme.spacing.sm,
+      padding: theme.spacing.md,
       borderRadius: 20,
-      marginBottom: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
       color: '#fee1e1'
     })}
     component={NavLink}
