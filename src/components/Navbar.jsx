@@ -6,38 +6,34 @@ import { NAVLINK_DATA } from '../constants';
 import Logout from './Logout';
 import { useAuth } from '../context/AuthContext';
 
-const MainLink = ({ icon, color, label , to, setOpen,colorScheme,toggleColorScheme}) => {
+const MainLink = ({ icon, label , to, setOpen,colorScheme,toggleColorScheme}) => {
   return (
     <UnstyledButton
-      sx={(theme) => ({
-        display: 'flex',
-        alignItems:"center",
-        justifyContent: 'space-between',
-        width: '100%',
-        padding: theme.spacing.sm,
-        border: `1px solid ${theme.colors.gray[4]}`,
-        borderRadius: 10,
-        marginBottom: theme.spacing.sm,
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-
-        '&:hover': {
-          backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-        },
-      })}
-      component={to ? NavLink:UnstyledButton}
+    component={NavLink}
+    sx={(theme) => ({
+      display: 'flex',
+      alignItems:"center",
+      justifyContent: 'space-between',
+      width: '100%',
+      padding: theme.spacing.md,
+      borderRadius: 20,
+      marginBottom: theme.spacing.md,
+      textDecoration: 'none',
+    })}
+      style={({ isActive }) => {
+        return {
+          background: isActive ? "#2d2f3a" : "none",
+          color: "#aaadb3",
+        }
+      }}
       to={to}
       onClick={() => to ? setOpen(false):undefined}
     >
       <Group>
-        <ThemeIcon color={color} variant="light">
           {icon}
-        </ThemeIcon>
-
-        <Text size="md">{label}</Text>
+        <Text size="md" >{label}</Text>
       </Group>
 
-      {to ? <IconChevronRight color='#A6A7AB'/>:<Switch checked={colorScheme==="dark"} onChange={() => toggleColorScheme()} style={{display:"grid"}}/>}
     </UnstyledButton>
   );
 }
@@ -50,11 +46,9 @@ const Links = ({setOpen}) => {
 const Navbar = ({open,setOpen,colorScheme,toggleColorScheme}) => {
   const { user } = useAuth()
   return (
-    <MantineNavbar width={{ sm: 200, lg: 300 }} hidden={!open} height={'100%'} p="xs">
+    <MantineNavbar width={{ sm: 200, lg: 300 }} hidden={!open} sx={{background: '#151a24',border:'none'}} height={'100%'} p="xs">
       <Links setOpen={setOpen}/>
-      {/* DARK MODE SWITCH */}
       { user.user?.token && <Logout icon={<IconPower size={18} />} label="Logout" color='red' to='/' setOpen={setOpen}/>}
-      <MainLink icon={<IconMoonStars size={18}/>} label="Dark Mode" color='yellow' colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>
     </MantineNavbar>
   )
 }

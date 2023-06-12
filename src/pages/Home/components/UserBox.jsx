@@ -1,5 +1,5 @@
-import { Avatar, Group, Text } from '@mantine/core'
-import { IconMapPins } from '@tabler/icons'
+import { ActionIcon, Avatar, Button, Group, Stack, Text } from '@mantine/core'
+import { IconBrandDeliveroo } from '@tabler/icons'
 import React from 'react'
 import { useAuth } from '../../../context/AuthContext'
 import getInitialsFromString from '../../../utils/getInitialsFromString'
@@ -7,20 +7,27 @@ import getInitialsFromString from '../../../utils/getInitialsFromString'
 const UserBox = () => {
   const {user} = useAuth()
   return (
-    <Group position="apart" sx={(theme) => ({
-      border: `1px solid ${theme.colors.gray[4]}`,
-      borderRadius: 8,
-      padding: theme.spacing.sm
-    })}>
-      <div>
-        <Text size={16}>{`Hi, ${ user.user?.name || "Guest User"}!`}</Text>
-        <div style={{display:"flex",gap:'4px'}}>
-          <IconMapPins color='#0d76c1'/>
-          <Text size={14} fs="italic" color={'dimmed'}>PU Campus,Waghodia</Text>
-        </div>
-      </div>
-      <Avatar color="blue" radius="xl">{getInitialsFromString(user.user?.name) || "GU"}</Avatar>
-    </Group>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'auto 2fr 1fr',
+      gap:'1rem',
+      placeItems:'center',
+      borderRadius: '16px',
+      background: '#fff',
+      padding: '1rem'
+    }}>
+    <Avatar color="dark" radius="xl" size={'lg'}>{"GU"}</Avatar>
+
+    <Stack spacing={0} mr='auto'>
+      <Text color='dimmed' >Greetings from us,</Text>
+      <Text size={18} fw={500} color='dark'>{`${ user.user?.name || "Guest User"}`}</Text>
+    </Stack>
+
+      <ActionIcon variant='outline' radius={'lg'} size={'xl'}>
+        <IconBrandDeliveroo />
+      </ActionIcon>
+
+    </div>
   )
 }
 

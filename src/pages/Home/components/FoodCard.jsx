@@ -39,33 +39,38 @@ const FoodCard = (data) => {
     <div 
     style={{
         display: 'grid',
-        gridTemplateColumns: '120px 200px',
+        gridTemplateColumns: '1fr 2fr',
         alignItems:'center',
         padding: "5px",
-        border: "1px solid #CED4DA",
+        background: '#fff',
         borderRadius: "5px",
         overflow: "hidden",
         filter: `grayscale(${data.inStock ? '0%':'80%'})`,
         pointerEvents: data.inStock ? 'auto':'none'
     }}>
-    <Image fit='cover' src={data?.imageURL} alt={data?.name}/>
+    <Image fit='contain'  radius={'md'} src={data?.imageURL} alt={data?.name}/>
     <div 
     style={{
         display: "flex",
         flexDirection:"column",
+        gap:'5px',
         alignItems:"flex-start",
         padding:"5px 10px",
         position: 'relaive'
     }}>
-        <Title order={5} transform={'capitalize'}>{data?.name}</Title>
-        <Badge
-        variant='outline'
-        size='sm'
-        radius={'sm'}
-        style={{marginTop:"auto"}}
-        >{data?.category}</Badge>
+      <Group style={{width:'100%',justifyContent:'space-between'}}>
+          <Text transform={'capitalize'} fw={500}>{data?.name}</Text>
+          <Button
+          variant='outline'
+          color='gray'
+          size='xs'
+          radius={'lg'}
+          compact
+          style={{marginTop:"auto"}}
+          ><Text transform='capitalize'>{data?.category}</Text></Button>
+      </Group>
         <Text style={{marginTop:"auto"}} color='dimmed' fw={500} fz="md">{`₹${data?.perPrice}`}</Text>
-        {!isItemInACart && <Button style={{marginTop:"auto",width:"100%"}} onClick={() => addItemToCart(data.name)}>Add</Button>}
+        {!isItemInACart && <Button style={{marginTop:"auto",width:"100%"}} color='dark' onClick={() => addItemToCart(data.name)}>Add</Button>}
         { isItemInACart && <CounterButtons name={data.name}/>}
     </div>
     </div>

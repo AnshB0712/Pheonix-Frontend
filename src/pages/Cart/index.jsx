@@ -1,4 +1,4 @@
-import { Button, Center, Text, Group, NativeSelect, Switch, Title } from '@mantine/core'
+import { Button, Center, Text, Group, NativeSelect, Switch, Title, SegmentedControl } from '@mantine/core'
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
@@ -15,15 +15,19 @@ const Cart = () => {
 
   return (
     <section style={{paddingBottom:'55px'}}>
-      <Group position='apart'>
+      <Group position='apart' style={{padding: "15px 0px"}}>
         <Title order={5}>Order Summary</Title>
-        <Group position='apart' align={'center'} spacing={5}>
-          <Text fz={14} fw={500} style={{paddingTop:"1.5px"}}>Take Out</Text>
-            <Switch checked={orderType == '7' ? true : false} onChange={e => setOrderType(e.target.checked ? '7':'13')} style={{display:"grid"}}/>
-          <Text fz={14} fw={500} style={{paddingTop:"1.5px"}}>Dine In</Text>
-        </Group>
+        <SegmentedControl
+        color='dark'
+         onChange={val => setOrderType(val)}
+         defaultValue={orderType}
+          data={[
+            { label: 'TakeOut', value: '13' },
+            { label: 'DineIn', value: '7' }]} 
+          />
+
       </Group>
-      <div style={{padding:"10px 0",maxHeight:'400px',overflow:'scroll'}}>
+      <div style={{padding:"10px 0",height:'400px',overflow:'scroll'}}>
         {!isCartEmpty() ?  <EmptyStateComponent index={'2'}/> : <DisplayData data={cartState} Component={CartCard}/>}
       </div>
         {isCartEmpty() &&  <BillBox totalValue={totalValue} items={orderItems} takeOutCharges={takeOutCharges}/>}

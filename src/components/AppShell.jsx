@@ -18,9 +18,10 @@ const AppShell = ({colorScheme,toggleColorScheme}) => {
   return (
     <MantineAppShell
       padding="sm"
+      sx={{backgroundColor:'#f8f8f9'}}
       navbarOffsetBreakpoint="sm"
-      navbar={<Navbar open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>}
-      header={<Header open={open} setOpen={setOpen} colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}/>}
+      navbar={<Navbar open={open} setOpen={setOpen} />}
+      header={<Header open={open} setOpen={setOpen} />}
       >
       <Routes>
         <Route element={<PersistLogin/>}>

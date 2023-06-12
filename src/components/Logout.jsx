@@ -17,16 +17,11 @@ const Logout = ({ icon, color, label , to}) => {
       alignItems:"center",
       justifyContent: 'space-between',
       width: '100%',
+      background: '#2d2f3a',
       padding: theme.spacing.sm,
-      border: `1px solid ${theme.colors.gray[4]}`,
-      borderRadius: 10,
+      borderRadius: 20,
       marginBottom: theme.spacing.sm,
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-
-      '&:hover': {
-        backgroundColor:
-          theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-      },
+      color: '#fee1e1'
     })}
     component={NavLink}
     to={to}
@@ -37,10 +32,9 @@ const Logout = ({ icon, color, label , to}) => {
         {icon}
       </ThemeIcon>
 
-      <Text size="md">{label}</Text>
+      <Text size="md" fw={500}>{label}</Text>
     </Group>
 
-    <IconChevronRight color='#A6A7AB'/>
   </UnstyledButton>
   )
 }

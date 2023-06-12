@@ -1,8 +1,8 @@
-import { Button, Chip, Group, Stack, Text } from '@mantine/core'
+import { Button, Group, Stack, Table, Text } from '@mantine/core'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
-import { CART_CONTEXT_ACTIONS } from '../../constants'
+import { CART_CONTEXT_ACTIONS, ORDER_STATUS_COLOR, ORDER_STATUS_FF } from '../../constants'
 import customAxios from '../../api/axios'
 
 const PastOrderCard = (data) => {
@@ -37,29 +37,46 @@ const PastOrderCard = (data) => {
   }
 
   return (
-    <Stack spacing={5} justify="space-between" style={{borderRadius:'5px',border:'1px solid #dbdbd8',padding:'8px 4px'}}>
-      <Group position='apart'  style={{borderBottom: '1px dashed grey',paddingBottom:'5px'}}>
-      <Text fz={13} fs={'italic'}>Created At: {new Date(data.createdAt).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})}</Text>
-      <Chip size="xs" radius="sm" checked={true} color={data.paymentStatus === 'SXS' ? 'green' : 'red'}>{data?.orderType === 7 ? 'Dine In':'Take Out'}</Chip>
+    <Stack spacing={5} mb={10} justify="space-between" style={{borderRadius:'5px',padding:'16px 8px',background:'#fff'}}>
+      <Group position='apart' style={{paddingBottom:'5px'}}>
+      <Text fz={13} fw={500} color='dimmed'>{new Date(data.createdAt).toLocaleString("en-US", {timeZone: "Asia/Kolkata",
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+})}</Text>
+      <Button variant='light' radius={'md'} size='xs' color={ORDER_STATUS_COLOR[data.orderStatus]}>{ORDER_STATUS_FF[data.orderStatus]}</Button>
       </Group>
-      <Stack spacing={1.5}>
-        {data?.items?.map(obj => {
-            return(
-                <Group position='apart' key={obj?.itemId} style={{padding:'4px 8px'}}>
-                    <Text fz={12} c='dimmed' transform={'capitalize'}>{obj?.itemName}</Text>
-                    <Text fz={12} c='dimmed'>₹{obj?.perPrice*obj?.qty}</Text>
-                    <Text fz={12} c='dimmed'>QTY: {obj?.qty}</Text>
-                </Group>
-            )
-        })}
+      <Stack spacing={0}>
+        <Table striped verticalSpacing={'xs'} >
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>QTY</th>
+              <th>PerPrice</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              data.items.map((item,i) => (
+                <tr key={i}>
+                  <td>{item?.itemName}</td>
+                  <td>{item?.qty}</td>
+                  <td>{item?.perPrice} INR</td>
+                  <td>{item?.qty*item?.perPrice} INR</td>
+                </tr>
+              ))
+            }
+          </tbody>
+      </Table>
+
       </Stack>
       <Group position='apart'>
-        <Text fw={500} fz={13}>Amount:  ₹{data?.amount}</Text>
+        <Text color='dimmed' fw={500} fz={13}>Total: {data?.amount} INR</Text>
         <Button  style={{textDecoration:'underline'}} variant='subtle' size="xs" component={Link} to={`/order/${data?._id}`}>
             Details
-        </Button>
-        <Button loading={loading} onClick={onClickRepeatOrder} color="orange" radius="xl" size="xs">
-            Repeat
         </Button>
       </Group>
     </Stack>

@@ -32,19 +32,20 @@ const CartCard = (data) => {
     <div 
     style={{
         display: 'grid',
-        gridTemplateColumns: '120px 150px 50px',
+        gridTemplateColumns: '2fr 2fr 1fr',
         alignItems:'center',
-        padding: "5px",
+        padding: "15px 10px",
         marginBottom: '5px',
-        border: "1px solid #CED4DA",
+        background: '#fff',
         borderRadius: "5px",
         overflow: "hidden"
     }}>
-    <Image fit='cover' src={data?.imageURL} alt={data?.name}/>
+    <Image fit='cover' radius={'md'} src={data?.imageURL} alt={data?.name}/>
     <div 
     style={{
         display: "flex",
         flexDirection:"column",
+        gap: '5px',
         alignItems:"flex-start",
         padding:"5px 10px",
     }}>

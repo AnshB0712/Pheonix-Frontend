@@ -11,7 +11,7 @@ const SearchInput = ({setSearchQuery,searchQuery}) => {
     </Center>
     <Text size="sm" style={{padding:"0 5px",marginBottom:"2px"}}>Categories you can choose from: </Text>
     <Chip.Group onChange={name => setSearchQuery(name)} position="center" style={{overflow:"scroll",display:"block",whiteSpace:"nowrap"}}>
-        {DISHES_CATEGORY.map((obj,i) => <Chip key={i} checked={searchQuery === obj.value} style={{display:"inline-block",margin:"0 5px"}} value={obj.value}>{obj.label}</Chip>)}
+        {DISHES_CATEGORY.map((obj,i) => <Chip color='dark' key={i} checked={searchQuery === obj.value} style={{display:"inline-block",margin:"0 5px"}} value={obj.value}>{obj.label}</Chip>)}
     </Chip.Group>
     </div>
   )

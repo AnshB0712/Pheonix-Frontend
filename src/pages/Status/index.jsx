@@ -34,13 +34,11 @@ const StatusPage = () => {
   if(isLoading) return <PaymentProcessLoader/>
 
   return (
-    <Paper>
-        <Waves id={data?.data?._id} paymentstatus={data?.data?.paymentStatus}/>
-        <Paper>
-            <OrderDetails data={data?.data}/>
-        </Paper>
-        <Button component={Link} to='/my-orders' fullWidth size='md' variant='white' mt={10}>Back to MyOrders</Button>
-    </Paper>
+    <Stack>
+        <Waves id={data?.data?._id} paymentstatus={data?.data?.paymentStatus} amount={data?.data?.amount}/>
+        <OrderDetails data={data?.data}/>
+        <Button component={Link} to='/my-orders' fullWidth size='md' variant='white' >Back to MyOrders</Button>
+    </Stack>
   )
 }
 
