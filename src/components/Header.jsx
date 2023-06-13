@@ -19,6 +19,7 @@ const Header = ({setOpen,open}) => {
                 size="md"
                 />
             </MediaQuery>
+        <Title ta="center" order={2} style={{ margin: '0 auto' }}>HungryHubs</Title>
             {user?.user?.token 
                       ? <Avatar color="dark" radius="xl">{getInitialsFromString(user.user?.name) || "GU"}</Avatar>
                       : <Button size="xs" component={Link} to='/auth'>Sign Up</Button>
