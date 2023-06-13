@@ -22,6 +22,7 @@ const Waves = (props) => {
         </div>
         <Text align='center' size={'lg'} fw={500}  sx={(theme) => ({color: theme.colors.dark[3]})}>{message}</Text>
         <Text align='center' color='dark' size={28} fw={500}>{props.amount} INR</Text>
+        <Text align='center' size={'xs'} fw={500}  sx={(theme) => ({color: theme.colors.dark[3]})}>OrderID: {props.id}</Text>
     </Stack>
   )
 }

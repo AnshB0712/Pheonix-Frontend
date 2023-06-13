@@ -24,6 +24,8 @@ const StatusPage = () => {
   const {data, isLoading} = useGetOrderStatus(orderId)
   const {dispatch} = useCart()
 
+  console.log(data)
+
   useEffect(() => {
     if(data?.data?.paymentStatus === 'SXS'){
       dispatch({type: CART_CONTEXT_ACTIONS.DELETE_CART})
